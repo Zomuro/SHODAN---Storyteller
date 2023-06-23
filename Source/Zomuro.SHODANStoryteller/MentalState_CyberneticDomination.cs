@@ -11,34 +11,57 @@ namespace Zomuro.SHODANStoryteller
 {
     public class MentalState_CyberneticDomination : MentalState
     {
+        public override string InspectLine
+        {
+            get
+            {
+                return def.baseInspectLine.Translate();
+            }
+        }
+
         public override void PostStart(string reason)
         {
-            orgFaction = pawn.Faction;
-            // alter to SHODAN's faction here
-
-            base.PostStart(reason);
+            // sends notification about the colonist being converted to SHODAN's team
             if (PawnUtility.ShouldSendNotificationAbout(pawn))
             {
-                string title = "Zomuro_SHODAN_CyberneticDomination_Letter".Translate(pawn.LabelShortCap);
-                string desc = "Zomuro_SHODAN_CyberneticDomination_LetterDesc".Translate(pawn.Label);
+                string title = def.beginLetterLabel.Translate(pawn.LabelShortCap);
+                string desc = def.beginLetter.Translate(pawn.NameShortColored);
                 if (!reason.NullOrEmpty())
                 {
                     desc = desc + "\n\n" + reason;
                 }
-                Find.LetterStack.ReceiveLetter(title, desc, LetterDefOf.ThreatSmall, pawn, null, null, null, null);
+                Find.LetterStack.ReceiveLetter(title, desc, def.beginLetterDef ?? LetterDefOf.ThreatSmall, pawn, null, null, null, null);
             }
+
+            // save original faction &  set faction to SHODAN's
+            orgFaction = pawn.Faction;
+            pawn.SetFactionDirect(Find.FactionManager.FirstFactionOfDef(FactionDefOf.Zomuro_SHODAN_Faction));
+            base.PostStart(reason);
         }
 
         public override void PostEnd()
         {
-            pawn.SetFactionDirect(orgFaction);
-
             base.PostEnd();
+            // return pawn to player faction and end state.
+            pawn.SetFactionDirect(orgFaction);
             if (pawn.jobs != null) pawn.jobs.StopAll(false, true);
+
             if (PawnUtility.ShouldSendNotificationAbout(pawn))
             {
                 Messages.Message("Zomuro_SHODAN_CyberneticDomination_Message".Translate(pawn.LabelShort), pawn, MessageTypeDefOf.SituationResolved, true);
             }
+        }
+
+        public override bool ForceHostileTo(Thing t)
+        {
+            if ((t as Pawn != null && t.def.race.Humanlike) || (t.Faction != null && t.Faction.def != FactionDefOf.Zomuro_SHODAN_Faction)) return true;
+            return false;
+        }
+
+        public override bool ForceHostileTo(Faction f)
+        {
+            if (f != null && f.def != FactionDefOf.Zomuro_SHODAN_Faction) return true;
+            return false;
         }
 
         public override RandomSocialMode SocialModeMax()

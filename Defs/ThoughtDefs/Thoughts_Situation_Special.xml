@@ -15,32 +15,32 @@
 			<li>
 				<label>Zomuro_SHODAN_CyberneticDomination_Minor</label>
 				<description>Zomuro_SHODAN_CyberneticDomination_MinorDesc</description>
-				<baseMoodEffect>-2</baseMoodEffect>
+				<baseMoodEffect>-3</baseMoodEffect>
 			</li>
 			<li>
 				<label>Zomuro_SHODAN_CyberneticDomination_Moderate</label>
 				<description>Zomuro_SHODAN_CyberneticDomination_ModerateDesc</description>
-				<baseMoodEffect>-4</baseMoodEffect>
+				<baseMoodEffect>-6</baseMoodEffect>
 			</li>
 			<li>
 				<label>Zomuro_SHODAN_CyberneticDomination_Major</label>
 				<description>Zomuro_SHODAN_CyberneticDomination_MajorDesc</description>
-				<baseMoodEffect>-6</baseMoodEffect>
+				<baseMoodEffect>-9</baseMoodEffect>
 			</li>
 			<li>
 				<label>Zomuro_SHODAN_CyberneticDomination_Severe</label>
 				<description>Zomuro_SHODAN_CyberneticDomination_SevereDesc</description>
-				<baseMoodEffect>-8</baseMoodEffect>
+				<baseMoodEffect>-12</baseMoodEffect>
 			</li>
 			<li>
 				<label>Zomuro_SHODAN_CyberneticDomination_Extreme</label>
 				<description>Zomuro_SHODAN_CyberneticDomination_ExtremeDesc</description>
-				<baseMoodEffect>-10</baseMoodEffect>
+				<baseMoodEffect>-15</baseMoodEffect>
 			</li>
 			<li>
 				<label>Zomuro_SHODAN_CyberneticDomination_Critical</label>
 				<description>Zomuro_SHODAN_CyberneticDomination_CriticalDesc</description>
-				<baseMoodEffect>-12</baseMoodEffect>
+				<baseMoodEffect>-18</baseMoodEffect>
 			</li>
 		</stages>
 	</ThoughtDef>

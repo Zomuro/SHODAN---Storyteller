@@ -11,12 +11,15 @@
 	<Zomuro_SHODAN_CyberneticDomination_Major>Major interference</Zomuro_SHODAN_CyberneticDomination_Major>
 	<Zomuro_SHODAN_CyberneticDomination_MajorDesc>This headache is starting to kill me. You hearing some whispers?</Zomuro_SHODAN_CyberneticDomination_MajorDesc>
 	<Zomuro_SHODAN_CyberneticDomination_Severe>Severe interference</Zomuro_SHODAN_CyberneticDomination_Severe>
-	<Zomuro_SHODAN_CyberneticDomination_SevereDesc>It's like there's a vise around my skull, frackkkk...</Zomuro_SHODAN_CyberneticDomination_SevereDesc>
+	<Zomuro_SHODAN_CyberneticDomination_SevereDesc>It's like there's a vise around my skull, frack...</Zomuro_SHODAN_CyberneticDomination_SevereDesc>
 	<Zomuro_SHODAN_CyberneticDomination_Extreme>Extreme interference</Zomuro_SHODAN_CyberneticDomination_Extreme>
-	<Zomuro_SHODAN_CyberneticDomination_ExtremeDesc>Oh god oh god, her voice is grating my brain.</Zomuro_SHODAN_CyberneticDomination_ExtremeDesc>
+	<Zomuro_SHODAN_CyberneticDomination_ExtremeDesc>Oh god oh god, her voice is grating my brain!</Zomuro_SHODAN_CyberneticDomination_ExtremeDesc>
 	<Zomuro_SHODAN_CyberneticDomination_Critical>Critical interference</Zomuro_SHODAN_CyberneticDomination_Critical>
 	<Zomuro_SHODAN_CyberneticDomination_CriticalDesc>ARGHHHHH! GET HER OUT!</Zomuro_SHODAN_CyberneticDomination_CriticalDesc>
 	<Zomuro_SHODAN_CyberneticDomination_Recovery>Mental liberation</Zomuro_SHODAN_CyberneticDomination_Recovery>
 	<Zomuro_SHODAN_CyberneticDomination_RecoveryDesc>Ughhh... I'm free from SHODAN, for now.</Zomuro_SHODAN_CyberneticDomination_RecoveryDesc>
+	
+	<!-- Inspect Line - Cybernetic Domination -->
+	<Zomuro_SHODAN_CyberneticDomination_InspectLine>Cybernetic domination active.</Zomuro_SHODAN_CyberneticDomination_InspectLine>
   
 </LanguageData>

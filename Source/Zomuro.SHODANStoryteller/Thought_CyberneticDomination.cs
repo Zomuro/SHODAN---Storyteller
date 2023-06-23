@@ -65,7 +65,7 @@ namespace Zomuro.SHODANStoryteller
 			if (hediffs.EnumerableNullOrEmpty()) return total;
 
 			// add chance to adjust mood debuff in settings
-			foreach (var hediff in hediffs) if (StorytellerUtility.TechImplantCheck(hediff)) total -= 2;
+			foreach (var hediff in hediffs) if (StorytellerUtility.TechImplantCheck(hediff)) total -= 3;
 			
 			return total;
 		}

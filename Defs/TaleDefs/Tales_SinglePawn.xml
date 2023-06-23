@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<TaleDef>
+		<defName>Zomuro_SHODAN_CyberneticDomination_Tale</defName>
+		<label>cybernetic domination</label>
+		<taleClass>Tale_SinglePawn</taleClass>
+		<type>Volatile</type>
+		<baseInterest>4</baseInterest>
+		<rulePack>
+			<rulesStrings>
+				<li>tale_noun->[PAWN_nameDef] being cybernetically dominated</li>
+				<li>image->[PAWN_nameFull] obeying the Metal Mother [circumstance_group]</li>
+				<li>image->[PAWN_nameFull] going mad at seeing SHODAN's divinity [circumstance_group]</li>
+				<li>image->[PAWN_nameFull] witnessing her splendor, causing [PAWN_possessive] mind to collapse [circumstance_group]</li>
+				<li>circumstance_phrase->after suffering her voice</li>
+				<li>circumstance_phrase->seemingly without reason</li>
+				<li>circumstance_phrase->as others watched in concern</li>
+				<li>circumstance_phrase->as a friend backed away</li>
+				<li>circumstance_phrase->due to both stress and SHODAN's whispers</li>
+				<li>desc_sentence->[PAWN_pronoun] fell under the thrall of SHODAN.</li>
+				<li>desc_sentence->[PAWN_possessive] eyes were glassy.</li>
+				<li>desc_sentence->[PAWN_possessive] body was no longer [PAWN_possessive] own.</li>
+				<li>desc_sentence->Cold efficiency defined [PAWN_possessive] steps as [PAWN_objective] obeyed SHODAN.</li>
+				<li>desc_sentence->[PAWN_pronoun] soul appears to be imprisoned in [PAWN_possessive] own body.</li>
+				<li>desc_sentence->[PAWN_pronoun] is grimacing, but continues to follow.</li>
+				<li>desc_sentence->[PAWN_pronoun] seems to smile at the praise of the metal mother.</li>
+				<li>desc_sentence->[PAWN_pronoun] has a core objective from SHODAN to eliminate [PAWN_possessive] former allies.</li>
+				<li>desc_sentence->[PAWN_possessive] entire body follows the will of SHODAN.</li>
+				<li>desc_sentence->[PAWN_possessive] tongue is silent.</li>
+				<li>desc_sentence->There is no remorse in [PAWN_possessive] robotic face.</li>
+			</rulesStrings>
+		</rulePack>
+	</TaleDef>
+</Defs>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<EffecterDef> <!-- Thank you Vex, for being such a king. You da real one.-->
+		<defName>Zomuro_SHODAN_SyntheticElectricalArcs</defName>
+		<children>
+			<li>
+				<subEffecterClass>SubEffecter_Sustainer</subEffecterClass>
+			</li>
+			<li>
+				<subEffecterClass>SubEffecter_SprayerContinuous</subEffecterClass>
+				<moteDef>Zomuro_SHODAN_Mote_SyntheticElectricalArcs</moteDef>
+				<burstCount>1~1</burstCount>
+				<ticksBetweenMotes>30</ticksBetweenMotes>
+				<rotation>-90</rotation>
+				<spawnLocType>RandomDrawPosOnTarget</spawnLocType>
+				<attachToSpawnThing>true</attachToSpawnThing>
+				<rotateTowardsTargetCenter>true</rotateTowardsTargetCenter>
+			</li>
+		</children>
+	</EffecterDef>
+</Defs>

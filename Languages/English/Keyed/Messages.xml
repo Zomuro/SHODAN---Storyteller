@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
   
-	<Zomuro_SHODAN_CyberneticDomination_Message>{0} has been freed from SHODAN's domination.</Zomuro_SHODAN_CyberneticDomination_Message>
+	<Zomuro_SHODAN_CyberneticDomination_Message>SHODAN has released her stranglehold on {0}.</Zomuro_SHODAN_CyberneticDomination_Message>
 
 </LanguageData>

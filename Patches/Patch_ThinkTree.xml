@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	
+	<!-- ThinkTree - MentalStateCritical - Cybernetic Domination -->
+	<Operation Class="PatchOperationInsert"> <!-- MentalStateCritical -->
+		<xpath>Defs/ThinkTreeDef[defName="MentalStateCritical"]/thinkRoot[@Class="ThinkNode_Tagger"]/subNodes/li[state="Berserk"]</xpath>
+		<value>
+			<li Class="ThinkNode_ConditionalMentalState">
+				<state>Zomuro_SHODAN_CyberneticDomination_State</state>
+				<subNodes>
+					<li Class="ThinkNode_Priority">
+						<subNodes>
+							<li Class="JobGiver_Berserk" />
+							<li Class="JobGiver_WanderAnywhere">
+								<maxDanger>Deadly</maxDanger>
+							</li>
+						</subNodes>
+					</li>
+				</subNodes>
+			</li>
+		</value>
+	</Operation>
+	
+	<!--<Operation Class="PatchOperationAdd">  Mechanoid 
+		<xpath>Defs/ThinkTreeDef[defName="Mechanoid"]/thinkRoot[@Class="ThinkNode_Priority"]/subNodes/li[state="BerserkMechanoid"]</xpath>
+		<value>
+			<li Class="ThinkNode_ConditionalMentalState">
+				<state>Zomuro_SHODAN_CyberneticDomination_State</state>
+				<subNodes>
+					<li Class="ThinkNode_Priority">
+						<subNodes>
+							<li Class="JobGiver_Berserk" />
+							<li Class="JobGiver_WanderAnywhere">
+								<maxDanger>Deadly</maxDanger>
+							</li>
+						</subNodes>
+					</li>
+				</subNodes>
+			</li>
+		</value>
+	</Operation>--> 
+	
+</Patch>

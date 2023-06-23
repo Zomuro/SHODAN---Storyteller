@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 	
-	<!-- thoughts -->
+	<!-- Letter - Cybernetic Domination -->
+	<!--<Zomuro_SHODAN_CyberneticDomination_LetterInit>Cybernetic domination</Zomuro_SHODAN_CyberneticDomination_LetterInit>-->
 	<Zomuro_SHODAN_CyberneticDomination_Letter>Cybernetic domination: {0}</Zomuro_SHODAN_CyberneticDomination_Letter>
-	<Zomuro_SHODAN_CyberneticDomination_LetterDesc>{0} has fallen under the influence of SHODAN. Incapacitate them to break her hold on their mind.</Zomuro_SHODAN_CyberneticDomination_LetterDesc>
+	<Zomuro_SHODAN_CyberneticDomination_LetterDesc>{0} has fallen under the influence of SHODAN.\n\nIncapacitate them to break her hold on their mind.</Zomuro_SHODAN_CyberneticDomination_LetterDesc>
 	
   
 </LanguageData>

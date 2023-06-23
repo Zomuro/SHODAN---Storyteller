@@ -53,9 +53,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MentalBreakDefOf.cs" />
+    <Compile Include="FactionDefOf.cs" />
+    <Compile Include="Thought_MentalLiberation.cs" />
     <Compile Include="MentalState_CyberneticDomination.cs" />
     <Compile Include="MentalBreakWorker_CyberneticDomination.cs" />
-    <Compile Include="StorytellerComp_SHODAN_Storage.cs" />
     <Compile Include="Thought_CyberneticDomination.cs" />
     <Compile Include="ThoughtWorker_CyberneticDomination.cs" />
     <Compile Include="StorytellerDefOf.cs" />

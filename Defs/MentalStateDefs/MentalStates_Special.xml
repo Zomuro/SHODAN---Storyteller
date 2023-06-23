@@ -3,11 +3,37 @@
 
 	<MentalBreakDef>
 		<defName>Zomuro_SHODAN_CyberneticDomination_Break</defName>
-		<mentalState>FireStartingSpree</mentalState>
+		<workerClass>Zomuro.SHODANStoryteller.MentalBreakWorker_CyberneticDomination</workerClass>
+		<mentalState>Zomuro_SHODAN_CyberneticDomination_State</mentalState>
 		<baseCommonality>0</baseCommonality>
 		<intensity>Extreme</intensity>
 	</MentalBreakDef>
 
+	<MentalStateDef ParentName="BaseMentalState">
+		<defName>Zomuro_SHODAN_CyberneticDomination_State</defName>
+		<stateClass>Zomuro.SHODANStoryteller.MentalState_CyberneticDomination</stateClass>
+		<label>cybernetic domination</label>
+		<category>Aggro</category>
+		<!--<nameColor>(0.9,0.2,0.5)</nameColor>-->
+		<moodRecoveryThought>Zomuro_SHODAN_MentalLiberation_Thought</moodRecoveryThought>
+		
+		<beginLetterLabel>Zomuro_SHODAN_CyberneticDomination_Letter</beginLetterLabel>
+		<beginLetter>Zomuro_SHODAN_CyberneticDomination_LetterDesc</beginLetter>
+		<recoveryMessage>Zomuro_SHODAN_CyberneticDomination_Message</recoveryMessage>
+		<baseInspectLine>Zomuro_SHODAN_CyberneticDomination_InspectLine</baseInspectLine>	
+		
+		<!--<colonistsOnly>false</colonistsOnly>-->
+		
+		<minTicksBeforeRecovery>99999999</minTicksBeforeRecovery>
+		<blockRandomInteraction>true</blockRandomInteraction>
+		<inCaravanCanDo>true</inCaravanCanDo>
+		<recoverFromSleep>false</recoverFromSleep>
+		<recoverFromDowned>true</recoverFromDowned>
+		<recoverFromCollapsingExhausted>false</recoverFromCollapsingExhausted>
+		
+		<stateEffecter>Zomuro_SHODAN_SyntheticElectricalArcs</stateEffecter>
+		<tale>Zomuro_SHODAN_CyberneticDomination_Tale</tale>
+	</MentalStateDef>
 
   <!-- Special mental states not from mental breaks -->
 
