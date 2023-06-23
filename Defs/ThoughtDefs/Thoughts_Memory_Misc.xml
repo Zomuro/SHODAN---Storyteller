@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThoughtDef>
+		<defName>Zomuro_SHODAN_MentalLiberation_Thought</defName>
+		<thoughtClass>Zomuro.SHODANStoryteller.Thought_MentalLiberation</thoughtClass>
+		<durationDays>5</durationDays>
+		<stackLimit>5</stackLimit>
+		<developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+		<stages>
+			<li>
+				<label>Zomuro_SHODAN_CyberneticDomination_Recovery</label>
+				<description>Zomuro_SHODAN_CyberneticDomination_RecoveryDesc</description>
+				<baseMoodEffect>30</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+</Defs>

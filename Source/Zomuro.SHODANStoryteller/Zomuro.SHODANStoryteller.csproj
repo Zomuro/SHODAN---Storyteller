@@ -53,8 +53,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MentalState_CyberneticDomination.cs" />
+    <Compile Include="MentalBreakWorker_CyberneticDomination.cs" />
+    <Compile Include="StorytellerComp_SHODAN_Storage.cs" />
+    <Compile Include="Thought_CyberneticDomination.cs" />
+    <Compile Include="ThoughtWorker_CyberneticDomination.cs" />
+    <Compile Include="StorytellerDefOf.cs" />
     <Compile Include="HarmonyPatches.cs" />
-    <Compile Include="SHODANStorytellerUtility.cs" />
+    <Compile Include="StorytellerUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

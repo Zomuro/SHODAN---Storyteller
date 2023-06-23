@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThoughtDef>
+		<defName>Zomuro_SHODAN_CyberneticDomination_Thought</defName>
+		<thoughtClass>Zomuro.SHODANStoryteller.Thought_CyberneticDomination</thoughtClass>
+		<workerClass>Zomuro.SHODANStoryteller.ThoughtWorker_CyberneticDomination</workerClass>
+		<validWhileDespawned>true</validWhileDespawned>
+		<stages> <!-- label and desc are keyed -->
+			<li>
+				<label>Zomuro_SHODAN_CyberneticDomination_Initial</label>
+				<description>Zomuro_SHODAN_CyberneticDomination_InitialDesc</description>
+				<baseMoodEffect>0</baseMoodEffect>
+			</li>
+			<li>
+				<label>Zomuro_SHODAN_CyberneticDomination_Minor</label>
+				<description>Zomuro_SHODAN_CyberneticDomination_MinorDesc</description>
+				<baseMoodEffect>-2</baseMoodEffect>
+			</li>
+			<li>
+				<label>Zomuro_SHODAN_CyberneticDomination_Moderate</label>
+				<description>Zomuro_SHODAN_CyberneticDomination_ModerateDesc</description>
+				<baseMoodEffect>-4</baseMoodEffect>
+			</li>
+			<li>
+				<label>Zomuro_SHODAN_CyberneticDomination_Major</label>
+				<description>Zomuro_SHODAN_CyberneticDomination_MajorDesc</description>
+				<baseMoodEffect>-6</baseMoodEffect>
+			</li>
+			<li>
+				<label>Zomuro_SHODAN_CyberneticDomination_Severe</label>
+				<description>Zomuro_SHODAN_CyberneticDomination_SevereDesc</description>
+				<baseMoodEffect>-8</baseMoodEffect>
+			</li>
+			<li>
+				<label>Zomuro_SHODAN_CyberneticDomination_Extreme</label>
+				<description>Zomuro_SHODAN_CyberneticDomination_ExtremeDesc</description>
+				<baseMoodEffect>-10</baseMoodEffect>
+			</li>
+			<li>
+				<label>Zomuro_SHODAN_CyberneticDomination_Critical</label>
+				<description>Zomuro_SHODAN_CyberneticDomination_CriticalDesc</description>
+				<baseMoodEffect>-12</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+  
+</Defs>
