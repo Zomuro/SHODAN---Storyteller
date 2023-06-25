@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 
 namespace Zomuro.SHODANStoryteller
 {
@@ -33,7 +35,7 @@ namespace Zomuro.SHODANStoryteller
                 Find.LetterStack.ReceiveLetter(title, desc, def.beginLetterDef ?? LetterDefOf.ThreatSmall, pawn, null, null, null, null);
             }
 
-            // save original faction &  set faction to SHODAN's
+            // save original faction & set faction to SHODAN's
             orgFaction = pawn.Faction;
             pawn.SetFactionDirect(Find.FactionManager.FirstFactionOfDef(FactionDefOf.Zomuro_SHODAN_Faction));
             base.PostStart(reason);
@@ -42,6 +44,7 @@ namespace Zomuro.SHODANStoryteller
         public override void PostEnd()
         {
             base.PostEnd();
+
             // return pawn to player faction and end state.
             pawn.SetFactionDirect(orgFaction);
             if (pawn.jobs != null) pawn.jobs.StopAll(false, true);
@@ -54,13 +57,13 @@ namespace Zomuro.SHODANStoryteller
 
         public override bool ForceHostileTo(Thing t)
         {
-            if ((t as Pawn != null && t.def.race.Humanlike) || (t.Faction != null && t.Faction.def != FactionDefOf.Zomuro_SHODAN_Faction)) return true;
+            if (t as Pawn != null && t.Faction != null && t.Faction != pawn.Faction) return true;
             return false;
         }
 
         public override bool ForceHostileTo(Faction f)
         {
-            if (f != null && f.def != FactionDefOf.Zomuro_SHODAN_Faction) return true;
+            if (f != null && f != pawn.Faction) return true;
             return false;
         }
 

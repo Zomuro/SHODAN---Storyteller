@@ -8,7 +8,7 @@ using Verse;
 
 namespace Zomuro.SHODANStoryteller
 {
-	public class Thought_MentalLiberation : Thought_Situational
+	public class Thought_MentalLiberation : Thought_Memory
 	{
 
 		public override string LabelCap

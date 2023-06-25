@@ -26,6 +26,7 @@ namespace Zomuro.SHODANStoryteller
         // test
         public static bool CurrentPossibleMoodBreaks_Prefix(MentalBreaker __instance, ref IEnumerable<MentalBreakDef> __result)
         {
+            CyberneticDominationBreakWorker.commonalityCached = 0;
             if (Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN)
             {
                 Traverse traverse = Traverse.Create(__instance);
@@ -42,7 +43,7 @@ namespace Zomuro.SHODANStoryteller
 
                 if (UnityEngine.Random.Range(0f, 1f) <= StorytellerUtility.CyberneticDominationChance(traverse.Field("pawn").GetValue<Pawn>()))
                 {
-                    
+                    CyberneticDominationBreakWorker.commonalityCached = 1;
                     __result = new List<MentalBreakDef>() { MentalBreakDefOf.Zomuro_SHODAN_CyberneticDomination_Break };
                     return false;
                 }
@@ -52,6 +53,12 @@ namespace Zomuro.SHODANStoryteller
             return true;
         }
 
-        
+        public static MentalBreakWorker_CyberneticDomination CyberneticDominationBreakWorker
+        {
+            get
+            {
+                return (MentalBreakDefOf.Zomuro_SHODAN_CyberneticDomination_Break.Worker as MentalBreakWorker_CyberneticDomination);
+            }
+        }
     }
 }
