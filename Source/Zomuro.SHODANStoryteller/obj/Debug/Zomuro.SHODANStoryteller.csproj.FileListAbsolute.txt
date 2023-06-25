@@ -1,4 +1,0 @@
-C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\SHODAN - Storyteller\Assemblies\Zomuro.SHODANStoryteller.dll
-C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\SHODAN - Storyteller\Source\Zomuro.SHODANStoryteller\obj\Debug\Zomuro.SHODANStoryteller.csprojAssemblyReference.cache
-C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\SHODAN - Storyteller\Source\Zomuro.SHODANStoryteller\obj\Debug\Zomuro.SHODANStoryteller.csproj.CoreCompileInputs.cache
-C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\SHODAN - Storyteller\Source\Zomuro.SHODANStoryteller\obj\Debug\Zomuro.SHODANStoryteller.dll
