@@ -21,16 +21,28 @@ namespace Zomuro.SHODANStoryteller
             // CurrentPossibleMoodBreaks_Prefix: if a pawn has a mental break, have chance to force SHODAN's incident
             harmony.Patch(AccessTools.Method(typeof(MentalBreaker), "get_CurrentPossibleMoodBreaks"),
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(CurrentPossibleMoodBreaks_Prefix)));
+
+            // SpawnSetup_Postfix: when a building is spawned, verify it can be added before adding a building to the hackable list.
+            harmony.Patch(AccessTools.Method(typeof(Building), "SpawnSetup"),
+                null, new HarmonyMethod(typeof(HarmonyPatches), nameof(SpawnSetup_Postfix)));
+
+            // DeSpawn_Postfix: when a building is despawned, remove it from the hackable list and hacked list.
+            harmony.Patch(AccessTools.Method(typeof(Building), "DeSpawn"),
+                null, new HarmonyMethod(typeof(HarmonyPatches), nameof(DeSpawn_Postfix)));
+
+            // Storyteller_PopulateHackable_Postfix: clean up and populate the mapcomponent on storyteller change
+            harmony.Patch(AccessTools.Constructor(typeof(Storyteller), new[] {typeof(StorytellerDef), typeof(DifficultyDef), typeof(Difficulty)}),
+                null, new HarmonyMethod(typeof(HarmonyPatches), nameof(Storyteller_PopulateHackable_Postfix)));
         }
 
-        // test
+        // PREFIX: if a pawn has a mental break, have a chance to force SHODAN's incident
         public static bool CurrentPossibleMoodBreaks_Prefix(MentalBreaker __instance, ref IEnumerable<MentalBreakDef> __result)
         {
             CyberneticDominationBreakWorker.commonalityCached = 0;
             if (Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN)
             {
                 Traverse traverse = Traverse.Create(__instance);
-                Log.Message("Calc Chance: " + StorytellerUtility.CyberneticDominationChance(traverse.Field("pawn").GetValue<Pawn>()));
+                //Log.Message("Calc Chance: " + StorytellerUtility.CyberneticDominationChance(traverse.Field("pawn").GetValue<Pawn>()));
 
                 //bool intensityCheck = (intensity != MentalBreakDefOf.Zomuro_SHODAN_CyberneticDomination_Break.intensity);
                 // add setting here to ensure SHODAN's incident can occur on various break intensities
@@ -60,5 +72,43 @@ namespace Zomuro.SHODANStoryteller
                 return (MentalBreakDefOf.Zomuro_SHODAN_CyberneticDomination_Break.Worker as MentalBreakWorker_CyberneticDomination);
             }
         }
+
+        // POSTFIX: when a building is spawned, verify it can be added before adding a building to the mapcomp hackable list.
+        public static void SpawnSetup_Postfix(Building __instance, Map __0)
+        {
+            //Log.Message("Building spawned: " + __instance.def.label);
+            //Log.Message("Hackable? " + );
+            if (__0 is null || !__0.IsPlayerHome) return;
+            StorytellerUtility.MapCompColonySubversion(__0).AddHackable(__instance);
+        }
+
+        // POSTFIX: when a building is despawned, remove it from the mapcomp hackable list and hacked list.
+        public static void DeSpawn_Postfix(Building __instance)
+        {
+            if (__instance.Map is null || !__instance.Map.IsPlayerHome) return;
+            StorytellerUtility.MapCompColonySubversion(__instance.Map).AddHackable(__instance);
+        }
+
+        // POSTFIX: clean up and populate the mapcomponent on storyteller change
+        public static void Storyteller_PopulateHackable_Postfix(StorytellerDef __0)
+        {
+            foreach (var map in Find.Maps.Where(x => x.IsPlayerHome))
+            {
+                MapComponent_ColonySubversion mapComp = StorytellerUtility.MapCompColonySubversion(map);
+                mapComp.CleanAll();
+
+                if (__0 == StorytellerDefOf.Zomuro_SHODAN)
+                {
+                    foreach (var building in map.listerBuildings.allBuildingsColonist) mapComp.AddHackable(building);
+                }  
+            }
+        }
+
+        // helper method to nab the right mapcomponent
+        public static MapComponent_ColonySubversion MapCompColonySubversion(Map map)
+        {
+            return map?.GetComponent<MapComponent_ColonySubversion>();
+        }
+
     }
 }

@@ -51,8 +51,14 @@
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IncidentWorker_ColonySubversion_AddHack.cs" />
+    <Compile Include="MapComponent_ColonySubversion.cs" />
     <Compile Include="JobGiver_CyberneticDominationSap.cs" />
     <Compile Include="JobGiver_CyberneticDominationAttack.cs" />
     <Compile Include="MentalBreakDefOf.cs" />

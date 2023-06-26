@@ -13,6 +13,7 @@ namespace Zomuro.SHODANStoryteller
 {
     public static class StorytellerUtility 
     {
+        // Cybernetic Domination  //
         public static bool TechImplantCheck(Hediff hediff)
         {
             // checks if the hediff is part/implant, if the thing used to implant isn't null
@@ -47,20 +48,12 @@ namespace Zomuro.SHODANStoryteller
             return Mathf.Clamp(finalProb, 0, 1f);
         }
 
-
-        /*public static Dictionary<ThingDef, HediffDef> ImplantDict
+        // Colony Infection //
+        public static MapComponent_ColonySubversion MapCompColonySubversion(Map map)
         {
-            get
-            {
-                if (cachedImplantDict.NullOrEmpty())
-                {
-                    cachedImplantDict = DefDatabase<RecipeDef>.AllDefs.Where(x => x.workerClass.GetType() == typeof(Recipe_Surgery)).Se;
-                }
-
-                return cachedImplantDict;
-            }
+            return map?.GetComponent<MapComponent_ColonySubversion>();
         }
 
-        private static Dictionary<ThingDef, HediffDef> cachedImplantDict = new Dictionary<ThingDef, HediffDef>();*/
+
     }
 }
