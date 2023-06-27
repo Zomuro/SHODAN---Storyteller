@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- Colony Subversion-->
+	<IncidentDef> <!-- Power consuming and generating building hacker -->
+		<defName>Zomuro_SHODAN_ColonySubversion_Hack</defName>
+		<label>Colony subversion</label>
+		<category>Special</category>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_Hack</workerClass>
+	</IncidentDef>
+	
+
+  
+</Defs>

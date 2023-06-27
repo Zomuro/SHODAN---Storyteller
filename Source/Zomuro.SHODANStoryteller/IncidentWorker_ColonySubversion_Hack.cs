@@ -5,24 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using RimWorld;
 using Verse;
+using UnityEngine;
 
 namespace Zomuro.SHODANStoryteller
 {
-    public class IncidentWorker_ColonySubversion_AddHack : IncidentWorker
+    public class IncidentWorker_ColonySubversion_Hack : IncidentWorker
     {
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            Map map = parms.target as Map;
-            return Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN && map != null && map.IsPlayerHome && 
-                StorytellerUtility.MapCompColonySubversion(map).ControlPercentage >= 0;
+            return Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN && parms.target is Map map && map.IsPlayerHome &&
+                StorytellerUtility.MapCompColonySubversion(map).CanFireIncident();
         }
 
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
             MapComponent_ColonySubversion mapComp = StorytellerUtility.MapCompColonySubversion(parms.target as Map);
-            if (mapComp.allHackableBuildings.Except(mapComp.hackedBuildings).TryRandomElement(out Building building))
+            if (mapComp.potentialHackable.Except(mapComp.potentialHacked).TryRandomElement(out Building building))
             {
-                mapComp.hackedBuildings.Add(building);
+                mapComp.potentialHacked.Add(building);
                 return true;
             }
 

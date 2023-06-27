@@ -33,6 +33,14 @@ namespace Zomuro.SHODANStoryteller
             // Storyteller_PopulateHackable_Postfix: clean up and populate the mapcomponent on storyteller change
             harmony.Patch(AccessTools.Constructor(typeof(Storyteller), new[] {typeof(StorytellerDef), typeof(DifficultyDef), typeof(Difficulty)}),
                 null, new HarmonyMethod(typeof(HarmonyPatches), nameof(Storyteller_PopulateHackable_Postfix)));
+
+            // TryConnectToAnyPowerNet_Postfix: when connecting a building to a powernet, recheck the hackables and hacked portions of the mapcomp
+            harmony.Patch(AccessTools.Method(typeof(CompPower), "ConnectToTransmitter"),
+                null, new HarmonyMethod(typeof(HarmonyPatches), nameof(ConnectToTransmitter_Postfix)));
+
+            // DisconnectFromPowerNet_Postfix: when disconnecting a building to a powernet, recheck the hackables and hacked portions of the mapcomp
+            harmony.Patch(AccessTools.Method(typeof(PowerConnectionMaker), "DisconnectFromPowerNet"),
+                null, new HarmonyMethod(typeof(HarmonyPatches), nameof(DisconnectFromPowerNet_Postfix)));
         }
 
         // PREFIX: if a pawn has a mental break, have a chance to force SHODAN's incident
@@ -86,7 +94,7 @@ namespace Zomuro.SHODANStoryteller
         public static void DeSpawn_Postfix(Building __instance)
         {
             if (__instance.Map is null || !__instance.Map.IsPlayerHome) return;
-            StorytellerUtility.MapCompColonySubversion(__instance.Map).AddHackable(__instance);
+            StorytellerUtility.MapCompColonySubversion(__instance.Map).RemoveBuilding(__instance);
         }
 
         // POSTFIX: clean up and populate the mapcomponent on storyteller change
@@ -96,11 +104,32 @@ namespace Zomuro.SHODANStoryteller
             {
                 MapComponent_ColonySubversion mapComp = StorytellerUtility.MapCompColonySubversion(map);
                 mapComp.CleanAll();
+                //map.powerNetManager.UpdatePowerNetsAndConnections_First();
 
                 if (__0 == StorytellerDefOf.Zomuro_SHODAN)
                 {
                     foreach (var building in map.listerBuildings.allBuildingsColonist) mapComp.AddHackable(building);
                 }  
+            }
+        }
+
+        // POSTFIX: when connecting a building to a powernet, recheck the hackables and hacked portions of the mapcomp
+        public static void ConnectToTransmitter_Postfix(CompPower __instance)
+        {
+            ResetMapCompCache(__instance);
+        }
+
+        // POSTFIX: when disconnecting a building to a powernet, recheck the hackables and hacked portions of the mapcomp
+        public static void DisconnectFromPowerNet_Postfix(CompPower __0)
+        {
+            ResetMapCompCache(__0);
+        }
+
+        public static void ResetMapCompCache(CompPower pc)
+        {
+            if (MapCompColonySubversion(pc.parent.Map) is MapComponent_ColonySubversion mapComp && mapComp != null)
+            {
+                mapComp.CleanCache();
             }
         }
 
