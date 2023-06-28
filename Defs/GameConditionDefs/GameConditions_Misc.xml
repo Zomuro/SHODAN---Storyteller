@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<GameConditionDef>
+		<defName>Zomuro_SHODAN_CyberSubversion_LightSap</defName>
+		<conditionClass>Zomuro.SHODANStoryteller.GameCondition_ColonySubversion_LightSap</conditionClass>
+		<label>lights off</label>
+		<description>A cyberattack has hit the colony. This particular one seems to be aimed at light fixtures within the colony.</description>
+		<endMessage>The effects of the malware have stopped.</endMessage>
+		<letterText>A cyberattack has hit the colony.\n\nThis particular one seems to be aimed at light fixtures within the colony.\n\nIt should pass in about a day.</letterText>
+		<letterDef>NegativeEvent</letterDef>
+		<canBePermanent>true</canBePermanent>
+	</GameConditionDef>
+
+</Defs>

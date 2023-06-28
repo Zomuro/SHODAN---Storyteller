@@ -14,7 +14,7 @@ namespace Zomuro.SHODANStoryteller
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN && parms.target is Map map && map.IsPlayerHome &&
-                StorytellerUtility.MapCompColonySubversion(map).CanFireIncident();
+                StorytellerUtility.MapCompColonySubversion(map).CanFireIncidentCheck();
         }
 
 		protected override bool TryExecuteWorker(IncidentParms parms)
@@ -23,10 +23,10 @@ namespace Zomuro.SHODANStoryteller
 
             MapComponent_ColonySubversion mapComp = StorytellerUtility.MapCompColonySubversion(parms.target as Map);
 
-            List<Building> targets = mapComp.potentialHacked;
-            mapComp.potentialHacked.Clear();
+            IEnumerable<Building> targets = mapComp.Hacked;
+            mapComp.potentialHacked = mapComp.potentialHacked.Except(targets).ToHashSet();
 
-            // add setting here on what exactly gets blown up- for now, about 15% will do
+            // add setting here on what probability of what gets blown up- for now, about 15% will do
             foreach(var target in targets)
             {
                 if (Rand.Chance(0.15f)) 

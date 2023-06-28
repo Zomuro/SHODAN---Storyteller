@@ -55,5 +55,17 @@ namespace Zomuro.SHODANStoryteller
         }
 
 
+        public static GameCondition_ColonySubversion_LightSap GameConditionLightSap(Map map)
+        {
+            if (cachedLightSap is null && map.IsPlayerHome)
+            {
+                cachedLightSap = (GameCondition_ColonySubversion_LightSap) map.GameConditionManager.GetActiveCondition(GameConditionDefOf.Zomuro_SHODAN_CyberSubversion_LightSap);
+            }
+            return cachedLightSap;
+        }
+
+        public static GameCondition_ColonySubversion_LightSap cachedLightSap;
+
+
     }
 }

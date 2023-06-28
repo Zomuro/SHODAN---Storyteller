@@ -22,13 +22,6 @@ namespace Zomuro.SHODANStoryteller
 
 		public IncidentDef hackingIncident;
 
-		public List<SubversionIncidentReq> subversionIncidents;
+		public List<IncidentDef> subversionIncidents;
 	}
-
-	public class SubversionIncidentReq
-    {
-		public IncidentDef incidentDef;
-
-		public float controlReq = 0;
-    }
 }

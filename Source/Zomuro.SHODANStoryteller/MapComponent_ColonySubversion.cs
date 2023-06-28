@@ -24,13 +24,14 @@ namespace Zomuro.SHODANStoryteller
 
             Widgets.BeginGroup(new Rect(0, 0, 200, 200));
 
-            Widgets.Label(new Rect(0, 0, 100, 100), "{0} / {1}".Formatted(Hacked.Count(), Hackables.Count()));
+            if (Hackable.Count() < 5) Widgets.Label(new Rect(0, 0, 100, 100), "Not enough buildings");
+            else Widgets.Label(new Rect(0, 0, 100, 100), "{0} / {1}".Formatted(Hacked.Count(), Hackable.Count()));
 
             Widgets.EndGroup();
             return;
 
             // add settings for minimum hackable buildings count
-            if (potentialHackable.NullOrEmpty() || potentialHackable.Count() < 7) return;
+            if (potentialHackable.EnumerableNullOrEmpty() || potentialHackable.Count() < 7) return;
 
             
         }
@@ -39,14 +40,14 @@ namespace Zomuro.SHODANStoryteller
         {
             get
             {
-                if (Hackables.NullOrEmpty()) return -1f;
-                return Hacked.Count() / Hackables.Count();
+                if (Hackable.EnumerableNullOrEmpty()) return -1f;
+                return Hacked.Count() / Hackable.Count();
             }
         }
 
-        public bool CanFireIncident()
+        public bool CanFireIncidentCheck()
         {
-            if (!Hackables.NullOrEmpty() && potentialHacked.Count() < potentialHackable.Count()) return true;
+            if (!Hackable.EnumerableNullOrEmpty() && Hacked.Count() <= Hackable.Count()) return true;
             return false;
         }
 
@@ -79,13 +80,8 @@ namespace Zomuro.SHODANStoryteller
 
         public void RemoveBuilding(Building building) // used when building is destroyed- force the building to be removed from potential
         {
-            
-
-            //if (building.GetComp<CompPowerTrader>() is null) return;
-            //building.Map.powerNetManager.UpdatePowerNetsAndConnections_First(); // ?? check, since base consumption will be affected
             potentialHacked.Remove(building);
             potentialHackable.Remove(building);
-
             CleanCache();
 
         }
@@ -106,17 +102,17 @@ namespace Zomuro.SHODANStoryteller
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Collections.Look(ref potentialHacked, "hackedBuildings", LookMode.Reference, Array.Empty<object>());
-            Scribe_Collections.Look(ref potentialHackable, "potentialHackable", LookMode.Reference, Array.Empty<object>());
+            Scribe_Collections.Look(ref potentialHacked, "potentialHacked", LookMode.Reference);
+            Scribe_Collections.Look(ref potentialHackable, "potentialHackable", LookMode.Reference);
         }
 
-        public List<Building> Hacked
+        public IEnumerable<Building> Hacked
         {
             get
             {
                 if (cachedHacked is null || dirtyHacked)
                 {
-                    cachedHacked = potentialHacked.Where(x => x.GetComp<CompPowerTrader>().PowerNet != null).ToList();
+                    cachedHacked = potentialHacked.Where(CheckActivePowerNet);
                     dirtyHacked = false;
                 }
 
@@ -124,13 +120,13 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
-        public List<Building> Hackables
+        public IEnumerable<Building> Hackable
         {
             get
             {
                 if(cachedHackable is null || dirtyHackable)
                 {
-                    cachedHackable = potentialHackable.Where(x => x.GetComp<CompPowerTrader>().PowerNet != null).ToList();
+                    cachedHackable = potentialHackable.Where(CheckActivePowerNet);
                     dirtyHackable = false;
                 }
 
@@ -138,16 +134,21 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
+        public bool CheckActivePowerNet(Building building)
+        {
+            if (building.GetComp<CompPowerTrader>().PowerNet is PowerNet pn && pn != null && pn.hasPowerSource) return true;
+            return false;
+        }
 
 
 
-        public List<Building> potentialHacked = new List<Building>();
+        public HashSet<Building> potentialHacked = new HashSet<Building>();
 
-        public List<Building> potentialHackable = new List<Building>();
+        public HashSet<Building> potentialHackable = new HashSet<Building>();
 
-        private List<Building> cachedHacked;
+        private IEnumerable<Building> cachedHacked;
 
-        private List<Building> cachedHackable;
+        private IEnumerable<Building> cachedHackable;
 
         public bool dirtyHacked = true;
 

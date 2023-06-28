@@ -34,7 +34,7 @@ namespace Zomuro.SHODANStoryteller
 			{
 				float control = StorytellerUtility.MapCompColonySubversion(target as Map).ControlPercentage;
 
-				IEnumerable<IncidentDef> possible = Props.subversionIncidents.Where(x => x.controlReq <= control).Select(x => x.incidentDef);
+				IEnumerable<IncidentDef> possible = Props.subversionIncidents;
 
                 if (!possible.EnumerableNullOrEmpty())
                 {

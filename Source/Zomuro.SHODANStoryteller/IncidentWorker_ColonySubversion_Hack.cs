@@ -13,16 +13,18 @@ namespace Zomuro.SHODANStoryteller
     {
         protected override bool CanFireNowSub(IncidentParms parms)
         {
+
             return Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN && parms.target is Map map && map.IsPlayerHome &&
-                StorytellerUtility.MapCompColonySubversion(map).CanFireIncident();
+                StorytellerUtility.MapCompColonySubversion(map).CanFireIncidentCheck();
         }
 
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
             MapComponent_ColonySubversion mapComp = StorytellerUtility.MapCompColonySubversion(parms.target as Map);
-            if (mapComp.potentialHackable.Except(mapComp.potentialHacked).TryRandomElement(out Building building))
+            if (mapComp.Hackable.Except(mapComp.Hacked).TryRandomElement(out Building building))
             {
                 mapComp.potentialHacked.Add(building);
+                mapComp.dirtyHacked = true;
                 return true;
             }
 
