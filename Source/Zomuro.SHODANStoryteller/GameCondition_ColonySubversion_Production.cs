@@ -22,10 +22,10 @@ namespace Zomuro.SHODANStoryteller
 			return MapCompSubversion.Hacked.Where(x => x.def.thingClass == typeof(Building_WorkTable)).ToHashSet();
 		}
 
-		public override void RecheckAffected()
+		/*public override void RecheckAffected()
 		{
 			affectedHacked = DetermineAffected();
-		}
+		}*/
 
 		public override void End()
 		{

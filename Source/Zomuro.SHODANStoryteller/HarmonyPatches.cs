@@ -147,7 +147,8 @@ namespace Zomuro.SHODANStoryteller
 
         public static void CompGetGizmosExtra_Postfix(CompPower __instance, ref IEnumerable<Gizmo> __result)
         {
-            if (__instance as CompPowerTrader != null && __instance.parent.Faction.IsPlayer && Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN)
+            bool factionCheck = __instance.parent.Faction == Faction.OfPlayer || __instance.parent.Faction == Find.FactionManager.FirstFactionOfDef(FactionDefOf.Zomuro_SHODAN_Faction);
+            if (__instance as CompPowerTrader != null && Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN && factionCheck)
             {
                 Gizmo gizmo = new Command_Action
                 {

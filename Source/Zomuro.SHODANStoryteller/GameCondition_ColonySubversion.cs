@@ -35,10 +35,10 @@ namespace Zomuro.SHODANStoryteller
 			}
 		}
 
-		public virtual void RecheckAffected()
+		/*public virtual void RecheckAffected()
 		{
 			
-		}
+		}*/
 
 		public void RemoveBuilding(Building b)
 		{

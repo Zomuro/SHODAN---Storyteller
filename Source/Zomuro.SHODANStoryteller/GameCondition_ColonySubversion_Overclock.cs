@@ -22,14 +22,20 @@ namespace Zomuro.SHODANStoryteller
 			return MapCompSubversion.Hacked.ToHashSet();
 		}
 
-		public override void RecheckAffected()
+		public override void GameConditionTick()
 		{
-			affectedHacked = DetermineAffected();
+			foreach(var building in affectedHacked)
+            {
+				// set interval for damage taken in settings
+				if (building.IsHashIntervalTick(60)) building.TakeDamage(dinfo);
+            }
 		}
 
 		public override void End()
 		{
 			base.End();
 		}
+
+		public DamageInfo dinfo = new DamageInfo(DamageDefOf.Flame, 1f, 1f);
 	}
 }

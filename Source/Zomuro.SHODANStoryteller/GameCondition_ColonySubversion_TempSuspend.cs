@@ -22,10 +22,10 @@ namespace Zomuro.SHODANStoryteller
 			return MapCompSubversion.Hacked.Where(x => x.TryGetComp<CompTempControl>() != null).ToHashSet();
 		}
 
-		public override void RecheckAffected()
+		/*public override void RecheckAffected()
 		{
 			affectedHacked = DetermineAffected();
-		}
+		}*/
 
 		public override void End()
 		{

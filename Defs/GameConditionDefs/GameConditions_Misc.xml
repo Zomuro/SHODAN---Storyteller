@@ -11,5 +11,7 @@
 		<letterDef>NegativeEvent</letterDef>
 		<canBePermanent>true</canBePermanent>
 	</GameConditionDef>
+	
+	
 
 </Defs>

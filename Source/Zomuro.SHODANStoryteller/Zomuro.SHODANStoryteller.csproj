@@ -57,6 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IncidentWorker_ColonySubversion_TempSuspend.cs" />
+    <Compile Include="IncidentWorker_ColonySubversion_IndustrialHalt.cs" />
+    <Compile Include="IncidentWorker_ColonySubversion_LightsOff.cs" />
     <Compile Include="JobDriver_ResetFlick.cs" />
     <Compile Include="JobDefOf.cs" />
     <Compile Include="WorkGiver_ColonySubversion_ResetFlick.cs" />
