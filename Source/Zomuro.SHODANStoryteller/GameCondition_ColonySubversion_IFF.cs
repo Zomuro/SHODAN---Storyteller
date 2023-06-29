@@ -14,8 +14,8 @@ namespace Zomuro.SHODANStoryteller
 		public override void Init()
 		{
 			base.Init();
-			affectedHacked = DetermineAffected();
-			foreach(var building in affectedHacked)
+			//affectedHacked = DetermineAffected();
+			foreach(var building in DetermineAffected())
             {
 				building.SetFactionDirect(Find.FactionManager.FirstFactionOfDef(FactionDefOf.Zomuro_SHODAN_Faction));
             }

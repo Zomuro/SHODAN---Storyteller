@@ -74,8 +74,10 @@ namespace Zomuro.SHODANStoryteller
         public void UnhackBuilding(Building building) // used when pawns go through a reset job on a building
         {
             potentialHacked.Remove(building);
+            RemoveFromGameCondition(building);
             //building.Map.powerNetManager.UpdatePowerNetsAndConnections_First(); // ?? check, since base consumption will be affected
             dirtyHacked = true;
+            
         }
 
         public void RemoveBuilding(Building building) // used when building is destroyed- force the building to be removed from potential
@@ -83,7 +85,8 @@ namespace Zomuro.SHODANStoryteller
             potentialHacked.Remove(building);
             potentialHackable.Remove(building);
             CleanCache();
-
+            //ClearGameConditionCache();
+            RemoveFromGameCondition(building);
         }
 
         public void CleanAll()
@@ -102,6 +105,7 @@ namespace Zomuro.SHODANStoryteller
         public override void ExposeData()
         {
             base.ExposeData();
+            //Scribe_References.Look(ref map, "map");
             Scribe_Collections.Look(ref potentialHacked, "potentialHacked", LookMode.Reference);
             Scribe_Collections.Look(ref potentialHackable, "potentialHackable", LookMode.Reference);
         }
@@ -141,6 +145,87 @@ namespace Zomuro.SHODANStoryteller
         }
 
 
+        public GameCondition_ColonySubversion_LightSap GameConditionLightSap
+        {
+            get
+            {
+                if (cachedLightSap is null && map.IsPlayerHome)
+                {
+                    cachedLightSap = map.GameConditionManager.GetActiveCondition<GameCondition_ColonySubversion_LightSap>();
+                }
+                return cachedLightSap;
+            }
+        }
+
+        public GameCondition_ColonySubversion_Production GameConditionProduction
+        {
+            get
+            {
+                if (cachedProd is null && map.IsPlayerHome)
+                {
+                    cachedProd = map.GameConditionManager.GetActiveCondition<GameCondition_ColonySubversion_Production>();
+                }
+                return cachedProd;
+            }
+        }
+
+        public GameCondition_ColonySubversion_Overclock GameConditionOverclock
+        {
+            get
+            {
+                if (cachedOverclock is null && map.IsPlayerHome)
+                {
+                    cachedOverclock = map.GameConditionManager.GetActiveCondition<GameCondition_ColonySubversion_Overclock>();
+                }
+                return cachedOverclock;
+            }
+        }
+
+        public GameCondition_ColonySubversion_TempSuspend GameConditionTempSuspend
+        {
+            get
+            {
+                if (cachedTemp is null && map.IsPlayerHome)
+                {
+                    cachedTemp = map.GameConditionManager.GetActiveCondition<GameCondition_ColonySubversion_TempSuspend>();
+                }
+                return cachedTemp;
+            }
+        }
+
+        public HashSet<Building> AggregGameCondition()
+        {
+            if (cachedTotalAffected is null && map.IsPlayerHome)
+            {
+                HashSet<Building> total = new HashSet<Building>();
+                total.AddRange(GameConditionLightSap?.affectedHacked ?? new HashSet<Building>());
+                total.AddRange(GameConditionProduction?.affectedHacked ?? new HashSet<Building>());
+                total.AddRange(GameConditionOverclock?.affectedHacked ?? new HashSet<Building>());
+                total.AddRange(GameConditionTempSuspend?.affectedHacked ?? new HashSet<Building>());
+                cachedTotalAffected = total;
+            }
+
+            return cachedTotalAffected;
+        }
+
+        public void RemoveFromGameCondition(Building building)
+        {
+            GameConditionLightSap?.affectedHacked.Remove(building);
+            GameConditionProduction?.affectedHacked.Remove(building);
+            GameConditionOverclock?.affectedHacked.Remove(building);
+            GameConditionTempSuspend?.affectedHacked.Remove(building);
+            building.SetFactionDirect(Faction.OfPlayer);
+            cachedTotalAffected = null;
+        }
+
+        public void ClearGameConditionCache()
+        {
+            cachedLightSap = null;
+            cachedProd = null;
+            cachedOverclock = null;
+            cachedTemp = null;
+            cachedTotalAffected = null;
+        }
 
         public HashSet<Building> potentialHacked = new HashSet<Building>();
 
@@ -149,6 +234,16 @@ namespace Zomuro.SHODANStoryteller
         private IEnumerable<Building> cachedHacked;
 
         private IEnumerable<Building> cachedHackable;
+
+        public GameCondition_ColonySubversion_LightSap cachedLightSap;
+
+        public GameCondition_ColonySubversion_Production cachedProd;
+
+        public GameCondition_ColonySubversion_Overclock cachedOverclock;
+
+        public GameCondition_ColonySubversion_TempSuspend cachedTemp;
+
+        public HashSet<Building> cachedTotalAffected;
 
         public bool dirtyHacked = true;
 

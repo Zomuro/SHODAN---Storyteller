@@ -21,5 +21,9 @@
 	
 	<!-- Inspect Line - Cybernetic Domination -->
 	<Zomuro_SHODAN_CyberneticDomination_InspectLine>Cybernetic domination active.</Zomuro_SHODAN_CyberneticDomination_InspectLine>
+	
+	<!-- Gizmo - Colony Subversion -->
+	<Zomuro_SHODAN_ColonySubversion_Label>Reset component</Zomuro_SHODAN_ColonySubversion_Label>
+	<Zomuro_SHODAN_ColonySubversion_Desc>Reset the building's component to a clean state, removing any malware.</Zomuro_SHODAN_ColonySubversion_Desc>
   
 </LanguageData>

@@ -48,23 +48,11 @@ namespace Zomuro.SHODANStoryteller
             return Mathf.Clamp(finalProb, 0, 1f);
         }
 
-        // Colony Infection //
+        // Colony Subversion //
         public static MapComponent_ColonySubversion MapCompColonySubversion(Map map)
         {
             return map?.GetComponent<MapComponent_ColonySubversion>();
         }
-
-
-        public static GameCondition_ColonySubversion_LightSap GameConditionLightSap(Map map)
-        {
-            if (cachedLightSap is null && map.IsPlayerHome)
-            {
-                cachedLightSap = (GameCondition_ColonySubversion_LightSap) map.GameConditionManager.GetActiveCondition(GameConditionDefOf.Zomuro_SHODAN_CyberSubversion_LightSap);
-            }
-            return cachedLightSap;
-        }
-
-        public static GameCondition_ColonySubversion_LightSap cachedLightSap;
 
 
     }

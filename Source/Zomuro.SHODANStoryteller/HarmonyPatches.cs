@@ -26,9 +26,9 @@ namespace Zomuro.SHODANStoryteller
             harmony.Patch(AccessTools.Method(typeof(Building), "SpawnSetup"),
                 null, new HarmonyMethod(typeof(HarmonyPatches), nameof(SpawnSetup_Postfix)));
 
-            // DeSpawn_Postfix: when a building is despawned, remove it from the hackable list and hacked list. // null, 
+            // DeSpawn_Prefix: when a building is despawned, remove it from the hackable list and hacked list. , 
             harmony.Patch(AccessTools.Method(typeof(Building), "DeSpawn"),
-                new HarmonyMethod(typeof(HarmonyPatches), nameof(DeSpawn_Postfix)));
+                new HarmonyMethod(typeof(HarmonyPatches), nameof(DeSpawn_Prefix)));
 
             // Storyteller_PopulateHackable_Postfix: clean up and populate the mapcomponent on storyteller change
             harmony.Patch(AccessTools.Constructor(typeof(Storyteller), new[] {typeof(StorytellerDef), typeof(DifficultyDef), typeof(Difficulty)}),
@@ -37,6 +37,14 @@ namespace Zomuro.SHODANStoryteller
             // TryConnectToAnyPowerNet_Postfix: when connecting a building to a powernet, recheck the hackables and hacked portions of the mapcomp
             harmony.Patch(AccessTools.Method(typeof(CompPower), "ConnectToTransmitter"),
                 null, new HarmonyMethod(typeof(HarmonyPatches), nameof(ConnectToTransmitter_Postfix)));
+
+            // set_PowerOn_Prefix: when a pawn tries to flick a building, if it is found in a hashset nothing happens. 
+            harmony.Patch(AccessTools.Method(typeof(CompFlickable), "DoFlick"),
+                new HarmonyMethod(typeof(HarmonyPatches), nameof(DoFlick_Prefix)));
+
+            // CompGetGizmosExtra_Postfix: adds the unhacking gizmo to comppowertrader buildings
+            harmony.Patch(AccessTools.Method(typeof(CompPower), "CompGetGizmosExtra"),
+                null, new HarmonyMethod(typeof(HarmonyPatches), nameof(CompGetGizmosExtra_Postfix)));
         }
 
         // PREFIX: if a pawn has a mental break, have a chance to force SHODAN's incident
@@ -85,10 +93,13 @@ namespace Zomuro.SHODANStoryteller
         }
 
         // POSTFIX: when a building is destroyed, remove it from the mapcomp hackable list and hacked list.
-        public static void DeSpawn_Postfix(Building __instance)
+        public static void DeSpawn_Prefix(Building __instance)
         {
             if (__instance.Map is null || !__instance.Map.IsPlayerHome) return;
-            StorytellerUtility.MapCompColonySubversion(__instance.Map).RemoveBuilding(__instance);
+
+            //StorytellerUtility.RemoveFromGameCondition(__instance);
+
+            MapCompColonySubversion(__instance.Map).RemoveBuilding(__instance);
         }
 
         // POSTFIX: clean up and populate the mapcomponent on storyteller change
@@ -121,10 +132,46 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
+        // PREFIX: stops flicking of switch from occuring if affected by gamecondition
+        public static bool DoFlick_Prefix(CompFlickable __instance)
+        {
+            if (MapCompColonySubversion(__instance.parent.Map).AggregGameCondition().Contains(__instance.parent)) 
+            {
+                Messages.Message("Zomuro_SHODAN_CyberneticSubversion_Off".Translate(__instance.parent.Label), __instance.parent, MessageTypeDefOf.RejectInput, true);
+                return false;
+            }
+
+
+            return true;
+        }
+
+        public static void CompGetGizmosExtra_Postfix(CompPower __instance, ref IEnumerable<Gizmo> __result)
+        {
+            if (__instance as CompPowerTrader != null && __instance.parent.Faction.IsPlayer && Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN)
+            {
+                Gizmo gizmo = new Command_Action
+                {
+                    icon = Traverse.Create(__instance).Property("CommandTex").GetValue<Texture2D>(),
+                    defaultLabel = "Zomuro_SHODAN_ColonySubversion_Label".Translate(),
+                    defaultDesc = "Zomuro_SHODAN_ColonySubversion_Desc".Translate(),
+                    action = delegate ()
+                    {
+                        Designation designation = __instance.parent.Map.designationManager.DesignationOn(__instance.parent, DesignationDefOf.Zomuro_SHODAN_Designation_ResetFlick);
+                        if (designation == null)
+                        {
+                            __instance.parent.Map.designationManager.AddDesignation(new Designation(__instance.parent, DesignationDefOf.Zomuro_SHODAN_Designation_ResetFlick, null));
+                        }
+                    }
+                };
+
+                __result = __result.AddItem(gizmo);
+            }
+        }
+
         // helper method to nab the right mapcomponent
         public static MapComponent_ColonySubversion MapCompColonySubversion(Map map)
         {
-            return map?.GetComponent<MapComponent_ColonySubversion>();
+            return StorytellerUtility.MapCompColonySubversion(map);
         }
 
     }

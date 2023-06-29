@@ -14,7 +14,12 @@ namespace Zomuro.SHODANStoryteller
 		public override void Init()
 		{
 			base.Init();
-			affectedHacked = DetermineAffected();
+			HashSet<Building> targets = DetermineAffected();
+			foreach(var building in targets)
+            {
+				TurnOffBuilding(building);
+			}
+			affectedHacked = targets;
 		}
 
 		public override HashSet<Building> DetermineAffected()

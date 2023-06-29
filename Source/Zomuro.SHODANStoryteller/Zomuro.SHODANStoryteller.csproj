@@ -57,6 +57,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JobDriver_ResetFlick.cs" />
+    <Compile Include="JobDefOf.cs" />
+    <Compile Include="WorkGiver_ColonySubversion_ResetFlick.cs" />
+    <Compile Include="DesignationDefOf.cs" />
     <Compile Include="GameCondition_ColonySubversion_IFF.cs" />
     <Compile Include="GameCondition_ColonySubversion_Overclock.cs" />
     <Compile Include="GameCondition_ColonySubversion_TempSuspend.cs" />

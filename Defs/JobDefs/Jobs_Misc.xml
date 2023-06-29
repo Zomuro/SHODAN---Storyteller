@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<JobDef>
+		<defName>Zomuro_SHODAN_Job_ResetFlick</defName>
+		<driverClass>Zomuro.SHODANStoryteller.JobDriver_ResetFlick</driverClass>
+		<reportString>resetting component.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+  
+</Defs>

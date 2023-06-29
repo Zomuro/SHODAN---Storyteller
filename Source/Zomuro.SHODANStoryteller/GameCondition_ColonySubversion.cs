@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RimWorld;
 using Verse;
 using Verse.Grammar;
+using HarmonyLib;
 
 namespace Zomuro.SHODANStoryteller
 {
@@ -22,6 +23,18 @@ namespace Zomuro.SHODANStoryteller
 			return null;
 		}
 
+		public virtual void TurnOffBuilding(Building building)
+        {
+			CompFlickable flick = (CompFlickable) Traverse.Create(building?.TryGetComp<CompPowerTrader>())?.Field("flickableComp")?.GetValue();
+			if (flick != null)
+            {
+				Traverse flickTrav = Traverse.Create(flick);
+				flick.parent.BroadcastCompSignal("FlickedOff");
+				flickTrav.Field("wantSwitchOn").SetValue(false);
+				flickTrav.Field("switchOnInt").SetValue(false);
+			}
+		}
+
 		public virtual void RecheckAffected()
 		{
 			
@@ -35,6 +48,7 @@ namespace Zomuro.SHODANStoryteller
 		public override void End()
 		{
 			base.End();
+			//MapCompSubversion.ClearGameConditionCache();
 		}
 
 		// expire the game condition if its duration is over OR if the map its for isn't a player home

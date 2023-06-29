@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<WorkGiverDef>
+		<defName>Zomuro_SHODAN_WorkGiver_ResetFlick</defName>
+		<label>reset components</label>
+		<giverClass>Zomuro.SHODANStoryteller.WorkGiver_ColonySubversion_ResetFlick</giverClass>
+		<workType>BasicWorker</workType>
+		<verb>reset component</verb>
+		<gerund>resetting component</gerund>
+		<canBeDoneWhileDrafted>true</canBeDoneWhileDrafted>
+		<priorityInType>500</priorityInType>
+	</WorkGiverDef>
+
+</Defs>
