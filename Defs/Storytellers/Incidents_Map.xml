@@ -3,13 +3,53 @@
 
 	<!-- Colony Subversion-->
 	<IncidentDef> <!-- Power consuming and generating building hacker -->
-		<defName>Zomuro_SHODAN_ColonySubversion_Hack</defName>
-		<label>Colony subversion</label>
+		<defName>Zomuro_SHODAN_ColonySubversion_Incid_Hack</defName>
+		<label>Colony subversion (hack)</label>
 		<category>Special</category>
 		<targetTags>
 			<li>Map_PlayerHome</li>
 		</targetTags>
 		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_Hack</workerClass>
+	</IncidentDef>
+	
+	<IncidentDef> <!-- Power consuming and generating building hacker -->
+		<defName>Zomuro_SHODAN_ColonySubversion_Incid_LightsOff</defName>
+		<label>Colony subversion (Lights off)</label>
+		<category>Special</category>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_LightsOff</workerClass>
+	</IncidentDef>
+	
+	<IncidentDef> <!-- Power consuming and generating building hacker -->
+		<defName>Zomuro_SHODAN_ColonySubversion_Incid_Production</defName>
+		<label>Colony subversion (Production halt)</label>
+		<category>Special</category>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_Production</workerClass>
+	</IncidentDef>
+	
+	<IncidentDef> <!-- Power consuming and generating building hacker -->
+		<defName>Zomuro_SHODAN_ColonySubversion_Incid_ClimateSuspend</defName>
+		<label>Colony subversion (Climate suspension)</label>
+		<category>Special</category>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_ClimateSuspend</workerClass>
+	</IncidentDef>
+	
+	<IncidentDef> <!-- Power consuming and generating building hacker -->
+		<defName>Zomuro_SHODAN_ColonySubversion_Incid_Overclock</defName>
+		<label>Colony subversion (Overclock)</label>
+		<category>Special</category>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_Overclock</workerClass>
 	</IncidentDef>
 	
 

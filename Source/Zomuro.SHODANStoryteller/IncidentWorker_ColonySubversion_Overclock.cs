@@ -8,7 +8,7 @@ using Verse;
 
 namespace Zomuro.SHODANStoryteller
 {
-	public class IncidentWorker_ColonySubversion_IndustrialHalt : IncidentWorker_MakeGameCondition
+	public class IncidentWorker_ColonySubversion_Overclock : IncidentWorker_MakeGameCondition
 	{
 		protected override bool CanFireNowSub(IncidentParms parms)
 		{
@@ -17,7 +17,8 @@ namespace Zomuro.SHODANStoryteller
 
 		public bool TargetExists(IncidentParms parms)
 		{
-			return StorytellerUtility.MapCompColonySubversion((Map)parms.target)?.Hacked.FirstOrDefault(x => x.def.thingClass == typeof(Building_WorkTable)) != null;
+			return StorytellerUtility.MapCompColonySubversion((Map)parms.target) is MapComponent_ColonySubversion mapComp &&
+				mapComp != null && !mapComp.Hacked.EnumerableNullOrEmpty();
 		}
 	}
 }

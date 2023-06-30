@@ -181,13 +181,13 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
-        public GameCondition_ColonySubversion_TempSuspend GameConditionTempSuspend
+        public GameCondition_ColonySubversion_ClimateSuspend GameConditionTempSuspend
         {
             get
             {
                 if (cachedTemp is null && map.IsPlayerHome)
                 {
-                    cachedTemp = map.GameConditionManager.GetActiveCondition<GameCondition_ColonySubversion_TempSuspend>();
+                    cachedTemp = map.GameConditionManager.GetActiveCondition<GameCondition_ColonySubversion_ClimateSuspend>();
                 }
                 return cachedTemp;
             }
@@ -241,7 +241,7 @@ namespace Zomuro.SHODANStoryteller
 
         public GameCondition_ColonySubversion_Overclock cachedOverclock;
 
-        public GameCondition_ColonySubversion_TempSuspend cachedTemp;
+        public GameCondition_ColonySubversion_ClimateSuspend cachedTemp;
 
         public HashSet<Building> cachedTotalAffected;
 

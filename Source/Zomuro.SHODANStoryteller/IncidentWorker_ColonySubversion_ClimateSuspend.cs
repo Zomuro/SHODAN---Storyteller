@@ -8,7 +8,7 @@ using Verse;
 
 namespace Zomuro.SHODANStoryteller
 {
-	public class IncidentWorker_ColonySubversion_TempSuspend : IncidentWorker_MakeGameCondition
+	public class IncidentWorker_ColonySubversion_ClimateSuspend : IncidentWorker_MakeGameCondition
 	{
 		protected override bool CanFireNowSub(IncidentParms parms)
 		{
