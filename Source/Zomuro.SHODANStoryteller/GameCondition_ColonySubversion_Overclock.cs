@@ -14,12 +14,7 @@ namespace Zomuro.SHODANStoryteller
 		public override void Init()
 		{
 			base.Init();
-			HashSet<Building> targets = DetermineAffected();
-			foreach (var building in targets)
-			{
-				TurnOffBuilding(building);
-			}
-			affectedHacked = targets;
+			affectedHacked = DetermineAffected();
 		}
 
 		public override HashSet<Building> DetermineAffected()
@@ -29,10 +24,15 @@ namespace Zomuro.SHODANStoryteller
 
 		public override void GameConditionTick()
 		{
-			foreach(var building in affectedHacked)
+			HashSet<Building> buildings = affectedHacked;
+			foreach(var building in buildings)
             {
 				// set interval for damage taken in settings
-				if (building.IsHashIntervalTick(60)) building.TakeDamage(dinfo);
+				if (building.IsHashIntervalTick(180)) 
+				{
+					building.TakeDamage(dinfo);
+					if (building.Destroyed) affectedHacked.Remove(building);
+				}
             }
 		}
 

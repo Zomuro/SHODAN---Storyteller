@@ -30,6 +30,11 @@ namespace Zomuro.SHODANStoryteller
 		public override void End()
 		{
 			base.End();
+			foreach (var building in affectedHacked)
+			{
+				if (building.TryGetComp<CompFlickable>() is CompFlickable comp && comp != null) comp.ResetToOn();
+			}
+			affectedHacked.Clear();
 		}
 	}
 }

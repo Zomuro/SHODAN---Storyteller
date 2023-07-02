@@ -215,6 +215,7 @@ namespace Zomuro.SHODANStoryteller
             GameConditionOverclock?.affectedHacked.Remove(building);
             GameConditionTempSuspend?.affectedHacked.Remove(building);
             building.SetFactionDirect(Faction.OfPlayer);
+            //map.GameConditionManager.GetActiveCondition<GameCondition_ColonySubversion_ClimateSuspend>()?.affectedHacked.Remove(building);
             cachedTotalAffected = null;
         }
 

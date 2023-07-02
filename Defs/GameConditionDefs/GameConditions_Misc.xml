@@ -2,23 +2,56 @@
 <Defs>
 
 	<GameConditionDef>
-		<defName>Zomuro_SHODAN_CyberSubversion_LightSap</defName>
+		<defName>Zomuro_SHODAN_CyberSubversion_GameCond_LightSap</defName>
 		<conditionClass>Zomuro.SHODANStoryteller.GameCondition_ColonySubversion_LightSap</conditionClass>
 		<label>lights off</label>
-		<description>A cyberattack has hit the colony. This particular one seems to be aimed at light fixtures within the colony.</description>
+		<description>A cyberattack has hit the colony. This particular one seems to be aimed at light fixtures within the colony.\n\nIt should pass within a day.</description>
 		<endMessage>The effects of the malware have stopped.</endMessage>
-		<letterText>A cyberattack has hit the colony.\n\nThis particular one seems to be aimed at light fixtures within the colony.\n\nIt should pass within a day.</letterText>
+		<letterText>A cyberattack has hit the colony. This particular one seems to be aimed at light fixtures within the colony.</letterText>
 		<letterDef>NegativeEvent</letterDef>
 		<canBePermanent>true</canBePermanent>
 	</GameConditionDef>
 	
 	<GameConditionDef>
-		<defName>Zomuro_SHODAN_CyberSubversion_Production</defName>
+		<defName>Zomuro_SHODAN_CyberSubversion_GameCond_Production</defName>
 		<conditionClass>Zomuro.SHODANStoryteller.GameCondition_ColonySubversion_Production</conditionClass>
 		<label>production halt</label>
-		<description>A cyberattack has hit the colony. This particular one seems to be aimed at powered sources of production within the colony.</description>
+		<description>A cyberattack has hit the colony. This particular one seems to be aimed at powered sources of production within the colony.\n\nIt should pass within a day.</description>
 		<endMessage>The effects of the malware have stopped.</endMessage>
-		<letterText>A cyberattack has hit the colony.\n\nThis particular one seems to be aimed at powered sources of production within the colony.\n\nIt should pass within a day.</letterText>
+		<letterText>A cyberattack has hit the colony. This particular one seems to be aimed at powered sources of production within the colony.</letterText>
+		<letterDef>NegativeEvent</letterDef>
+		<canBePermanent>true</canBePermanent>
+	</GameConditionDef>
+	
+	<GameConditionDef>
+		<defName>Zomuro_SHODAN_CyberSubversion_GameCond_ClimateSuspend</defName>
+		<conditionClass>Zomuro.SHODANStoryteller.GameCondition_ColonySubversion_ClimateSuspend</conditionClass>
+		<label>climate suspension</label>
+		<description>A cyberattack has hit the colony. This particular one seems to be aimed at powered sources of heat and cold within the colony.\n\nIt should pass within a day.</description>
+		<endMessage>The effects of the malware have stopped.</endMessage>
+		<letterText>A cyberattack has hit the colony. This particular one seems to be aimed at powered sources of heat and cold within the colony.</letterText>
+		<letterDef>NegativeEvent</letterDef>
+		<canBePermanent>true</canBePermanent>
+	</GameConditionDef>
+	
+	<GameConditionDef>
+		<defName>Zomuro_SHODAN_CyberSubversion_GameCond_Overclock</defName>
+		<conditionClass>Zomuro.SHODANStoryteller.GameCondition_ColonySubversion_Overclock</conditionClass>
+		<label>overclock</label>
+		<description>A cyberattack has hit the colony. This particular one appears to indiscriminately hit all powered buildings, forcing them to run dangerously hot.\n\nIt should pass within a day.</description>
+		<endMessage>The effects of the malware have stopped.</endMessage>
+		<letterText>A cyberattack has hit the colony. This particular one appears to indiscriminately hit all powered buildings, forcing them to run dangerously hot.</letterText>
+		<letterDef>NegativeEvent</letterDef>
+		<canBePermanent>true</canBePermanent>
+	</GameConditionDef>
+	
+	<GameConditionDef>
+		<defName>Zomuro_SHODAN_CyberSubversion_GameCond_IFF</defName>
+		<conditionClass>Zomuro.SHODANStoryteller.GameCondition_ColonySubversion_IFF</conditionClass>
+		<label>overclock</label>
+		<description>A cyberattack has hit the colony. This particular one tampers with the Identification Friend or Foe (IFF) systems of any infected turret, turning it against the colony temporarily.</description>
+		<endMessage>The effects of the malware have stopped.</endMessage>
+		<letterText>A cyberattack has hit the colony. This particular one tampers with the Identification Friend or Foe (IFF) systems of any infected turret, turning it against the colony temporarily.</letterText>
 		<letterDef>NegativeEvent</letterDef>
 		<canBePermanent>true</canBePermanent>
 	</GameConditionDef>

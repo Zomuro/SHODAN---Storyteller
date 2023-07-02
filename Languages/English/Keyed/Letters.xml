@@ -6,5 +6,17 @@
 	<Zomuro_SHODAN_CyberneticDomination_Letter>Cybernetic domination: {0}</Zomuro_SHODAN_CyberneticDomination_Letter>
 	<Zomuro_SHODAN_CyberneticDomination_LetterDesc>{0} has fallen under the influence of SHODAN.\n\nIncapacitate them to break her hold on their mind.</Zomuro_SHODAN_CyberneticDomination_LetterDesc>
 	
-  
+	<!-- Letter - Colony Subversion -->
+	<Zomuro_SHODAN_ColonySubversion_Letter>Overload</Zomuro_SHODAN_ColonySubversion_Letter>
+	<Zomuro_SHODAN_ColonySubversion_LetterDesc>A cyberattack has hit the colony. Much of the colony's gfrid has been overloaded at the worst possible time, damaging key infrastructure while SHODAN's forces are closing in.</Zomuro_SHODAN_ColonySubversion_LetterDesc>
+	<Zomuro_SHODAN_ColonySubversion_LightsOff_Letter>Lights off</Zomuro_SHODAN_ColonySubversion_LightsOff_Letter>
+	<Zomuro_SHODAN_ColonySubversion_LightsOff_LetterDesc>A cyberattack has hit the colony. This particular one seems to be aimed at light fixtures within the colony- any infected source of illumination will be shut down for a while.</Zomuro_SHODAN_ColonySubversion_LightsOff_LetterDesc>
+	<Zomuro_SHODAN_ColonySubversion_Production_Letter>Production halt</Zomuro_SHODAN_ColonySubversion_Production_Letter>
+	<Zomuro_SHODAN_ColonySubversion_Production_LetterDesc>A cyberattack has hit the colony. This particular one seems to be aimed at powered production, causing any infected work table to be shut down for a while.</Zomuro_SHODAN_ColonySubversion_Production_LetterDesc>
+	<Zomuro_SHODAN_ColonySubversion_ClimateSuspend_Letter>Climate suspension</Zomuro_SHODAN_ColonySubversion_ClimateSuspend_Letter>
+	<Zomuro_SHODAN_ColonySubversion_ClimateSuspend_LetterDesc>A cyberattack has hit the colony. This particular one seems to be aimed at temporarily shutting down infected HVAC systems.</Zomuro_SHODAN_ColonySubversion_ClimateSuspend_LetterDesc>
+	<Zomuro_SHODAN_ColonySubversion_Overclock_Letter>Overclock</Zomuro_SHODAN_ColonySubversion_Overclock_Letter>
+	<Zomuro_SHODAN_ColonySubversion_Overclock_LetterDesc>A cyberattack has hit the colony. This one appears to increase the clock rate of processors massively, degrading the integrity of any hacked building over time.</Zomuro_SHODAN_ColonySubversion_Overclock_LetterDesc>
+	<Zomuro_SHODAN_ColonySubversion_IFF_Letter>Friend-to-foe</Zomuro_SHODAN_ColonySubversion_IFF_Letter>
+	<Zomuro_SHODAN_ColonySubversion_IFF_LetterDesc>A cyberattack has hit the colony. This particular one tampers with the Identification Friend or Foe (IFF) systems of any infected turret, turning it against the colony temporarily.</Zomuro_SHODAN_ColonySubversion_IFF_LetterDesc>
 </LanguageData>

@@ -14,10 +14,10 @@ namespace Zomuro.SHODANStoryteller
 		public override void Init()
 		{
 			base.Init();
-			//affectedHacked = DetermineAffected();
-			foreach(var building in DetermineAffected())
+			affectedHacked = DetermineAffected();
+			foreach(var building in affectedHacked)
             {
-				building.SetFactionDirect(Find.FactionManager.FirstFactionOfDef(FactionDefOf.Zomuro_SHODAN_Faction));
+				building.SetFaction(Find.FactionManager.FirstFactionOfDef(FactionDefOf.Zomuro_SHODAN_Faction));
             }
 		}
 
@@ -28,11 +28,11 @@ namespace Zomuro.SHODANStoryteller
 
 		public override void End()
 		{
-			base.End();
 			foreach (var building in affectedHacked)
 			{
-				building.SetFactionDirect(Find.FactionManager.OfPlayer);
+				building.SetFaction(Find.FactionManager.OfPlayer);
 			}
+			base.End();
 		}
 	}
 }

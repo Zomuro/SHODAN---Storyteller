@@ -24,7 +24,7 @@ namespace Zomuro.SHODANStoryteller
 
 		public override HashSet<Building> DetermineAffected()
 		{
-			return MapCompSubversion.Hacked.Where(x => x.TryGetComp<CompGlower>() != null).ToHashSet();
+			return MapCompSubversion.Hacked.Where(x => x.TryGetComp<CompGlower>() != null && x.TryGetComp<CompTempControl>() is null).ToHashSet();
 		}
 
 		/*public override void RecheckAffected()
@@ -35,6 +35,11 @@ namespace Zomuro.SHODANStoryteller
 		public override void End()
 		{
 			base.End();
+			foreach (var building in affectedHacked)
+			{
+				if (building.TryGetComp<CompFlickable>() is CompFlickable comp && comp != null) comp.ResetToOn();
+			}
+			affectedHacked.Clear();
 		}
 	}
 }

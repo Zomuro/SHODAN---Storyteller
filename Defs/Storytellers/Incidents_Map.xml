@@ -2,7 +2,7 @@
 <Defs>
 
 	<!-- Colony Subversion-->
-	<IncidentDef> <!-- Power consuming and generating building hacker -->
+	<IncidentDef> 
 		<defName>Zomuro_SHODAN_ColonySubversion_Incid_Hack</defName>
 		<label>Colony subversion (hack)</label>
 		<category>Special</category>
@@ -10,9 +10,10 @@
 			<li>Map_PlayerHome</li>
 		</targetTags>
 		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_Hack</workerClass>
+		<letterDef>NegativeEvent</letterDef>
 	</IncidentDef>
 	
-	<IncidentDef> <!-- Power consuming and generating building hacker -->
+	<IncidentDef> 
 		<defName>Zomuro_SHODAN_ColonySubversion_Incid_LightsOff</defName>
 		<label>Colony subversion (Lights off)</label>
 		<category>Special</category>
@@ -20,9 +21,13 @@
 			<li>Map_PlayerHome</li>
 		</targetTags>
 		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_LightsOff</workerClass>
+		<gameCondition>Zomuro_SHODAN_CyberSubversion_GameCond_LightSap</gameCondition>
+		<durationDays>0.5~1.0</durationDays>
+		<letterLabel>lights off</letterLabel>
+		<letterDef>NegativeEvent</letterDef>
 	</IncidentDef>
 	
-	<IncidentDef> <!-- Power consuming and generating building hacker -->
+	<IncidentDef> 
 		<defName>Zomuro_SHODAN_ColonySubversion_Incid_Production</defName>
 		<label>Colony subversion (Production halt)</label>
 		<category>Special</category>
@@ -30,9 +35,13 @@
 			<li>Map_PlayerHome</li>
 		</targetTags>
 		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_Production</workerClass>
+		<gameCondition>Zomuro_SHODAN_CyberSubversion_GameCond_Production</gameCondition>
+		<durationDays>0.5~1.0</durationDays>
+		<letterLabel>production halt</letterLabel>
+		<letterDef>NegativeEvent</letterDef>
 	</IncidentDef>
 	
-	<IncidentDef> <!-- Power consuming and generating building hacker -->
+	<IncidentDef> 
 		<defName>Zomuro_SHODAN_ColonySubversion_Incid_ClimateSuspend</defName>
 		<label>Colony subversion (Climate suspension)</label>
 		<category>Special</category>
@@ -40,9 +49,13 @@
 			<li>Map_PlayerHome</li>
 		</targetTags>
 		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_ClimateSuspend</workerClass>
+		<gameCondition>Zomuro_SHODAN_CyberSubversion_GameCond_ClimateSuspend</gameCondition>
+		<durationDays>0.5~1.0</durationDays>
+		<letterLabel>climate suspend</letterLabel>
+		<letterDef>NegativeEvent</letterDef>
 	</IncidentDef>
 	
-	<IncidentDef> <!-- Power consuming and generating building hacker -->
+	<IncidentDef>
 		<defName>Zomuro_SHODAN_ColonySubversion_Incid_Overclock</defName>
 		<label>Colony subversion (Overclock)</label>
 		<category>Special</category>
@@ -50,6 +63,37 @@
 			<li>Map_PlayerHome</li>
 		</targetTags>
 		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_Overclock</workerClass>
+		<gameCondition>Zomuro_SHODAN_CyberSubversion_GameCond_Overclock</gameCondition>
+		<durationDays>0.25~0.5</durationDays>
+		<letterLabel>overclock</letterLabel>
+		<letterDef>NegativeEvent</letterDef>
+	</IncidentDef>
+	
+	<IncidentDef>
+		<defName>Zomuro_SHODAN_ColonySubversion_Incid_IFF</defName>
+		<label>Colony subversion (IFF)</label>
+		<category>Special</category>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_IFF</workerClass>
+		<gameCondition>Zomuro_SHODAN_CyberSubversion_GameCond_IFF</gameCondition>
+		<durationDays>0.25~0.75</durationDays>
+		<letterLabel>friend-to-foe</letterLabel>
+		<letterDef>NegativeEvent</letterDef>
+	</IncidentDef>
+	
+	<IncidentDef> 
+		<defName>Zomuro_SHODAN_ColonySubversion_Incid_Raid</defName>
+		<label>overload</label>
+		<category>Special</category>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>Zomuro.SHODANStoryteller.IncidentWorker_ColonySubversion_Raid</workerClass>
+		<letterLabel>Zomuro_SHODAN_ColonySubversion_Letter</letterLabel>
+		<letterText>Zomuro_SHODAN_ColonySubversion_LetterDesc</letterText>
+		<letterDef>NegativeEvent</letterDef>
 	</IncidentDef>
 	
 

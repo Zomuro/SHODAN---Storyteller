@@ -33,6 +33,8 @@ namespace Zomuro.SHODANStoryteller
                     GenExplosion.DoExplosion(target.Position, target.Map, target.PowerComp.Props.PowerConsumption / 1000f, DamageDefOf.Bomb, target);
             }
 
+            base.SendStandardLetter(def.letterLabel.Translate(), def.letterText.Translate(), def.letterDef, parms, null, Array.Empty<NamedArgument>());
+
             return true;
 		}
 

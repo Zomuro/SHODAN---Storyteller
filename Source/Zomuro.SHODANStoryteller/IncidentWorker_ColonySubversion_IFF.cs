@@ -8,7 +8,7 @@ using Verse;
 
 namespace Zomuro.SHODANStoryteller
 {
-	public class IncidentWorker_ColonySubversion_LightsOff : IncidentWorker_MakeGameCondition
+	public class IncidentWorker_ColonySubversion_IFF : IncidentWorker_MakeGameCondition
 	{
 		protected override bool CanFireNowSub(IncidentParms parms)
 		{
@@ -17,7 +17,7 @@ namespace Zomuro.SHODANStoryteller
 
 		public bool TargetExists(IncidentParms parms)
 		{
-			return StorytellerUtility.MapCompColonySubversion((Map)parms.target)?.Hacked.FirstOrDefault(x => x.TryGetComp<CompGlower>() != null && x.TryGetComp<CompTempControl>() is null) != null;
+			return StorytellerUtility.MapCompColonySubversion((Map)parms.target)?.Hacked.FirstOrDefault(x => x.def.thingClass == typeof(Building_TurretGun)) != null;
 		}
 	}
 }

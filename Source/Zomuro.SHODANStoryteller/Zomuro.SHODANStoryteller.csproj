@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IncidentWorker_ColonySubversion_ClimateSuspend.cs" />
+    <Compile Include="IncidentWorker_ColonySubversion_Overclock.cs" />
+    <Compile Include="IncidentWorker_ColonySubversion_IFF.cs" />
     <Compile Include="IncidentWorker_ColonySubversion_Production.cs" />
     <Compile Include="IncidentWorker_ColonySubversion_LightsOff.cs" />
     <Compile Include="JobDriver_ResetFlick.cs" />
@@ -72,7 +74,6 @@
     <Compile Include="GameCondition_ColonySubversion.cs" />
     <Compile Include="IncidentDefOf.cs" />
     <Compile Include="IncidentWorker_ColonySubversion_Raid.cs" />
-    <Compile Include="GameConditionDefOf.cs" />
     <Compile Include="StorytellerCompProperties_ColonySubversion.cs" />
     <Compile Include="StorytellerComp_ColonySubversion.cs" />
     <Compile Include="IncidentWorker_ColonySubversion_Hack.cs" />

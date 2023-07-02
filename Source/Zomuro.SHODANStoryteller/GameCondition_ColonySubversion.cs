@@ -35,11 +35,6 @@ namespace Zomuro.SHODANStoryteller
 			}
 		}
 
-		/*public virtual void RecheckAffected()
-		{
-			
-		}*/
-
 		public void RemoveBuilding(Building b)
 		{
 			affectedHacked.Remove(b);
@@ -48,8 +43,17 @@ namespace Zomuro.SHODANStoryteller
 		public override void End()
 		{
 			base.End();
-			//MapCompSubversion.ClearGameConditionCache();
+			// force buildings to be turned on 
+			
 		}
+
+		/*public override string LetterText
+		{
+			get
+			{
+				return def.letterText.Translate();
+			}
+		}*/
 
 		// expire the game condition if its duration is over OR if the map its for isn't a player home
 		public override bool Expired 
