@@ -25,6 +25,7 @@
 		<durationDays>0.5~1.0</durationDays>
 		<letterLabel>lights off</letterLabel>
 		<letterDef>NegativeEvent</letterDef>
+		<baseChance>4</baseChance>
 	</IncidentDef>
 	
 	<IncidentDef> 
@@ -39,6 +40,7 @@
 		<durationDays>0.5~1.0</durationDays>
 		<letterLabel>production halt</letterLabel>
 		<letterDef>NegativeEvent</letterDef>
+		<baseChance>3</baseChance>
 	</IncidentDef>
 	
 	<IncidentDef> 
@@ -53,6 +55,7 @@
 		<durationDays>0.5~1.0</durationDays>
 		<letterLabel>climate suspend</letterLabel>
 		<letterDef>NegativeEvent</letterDef>
+		<baseChance>2</baseChance>
 	</IncidentDef>
 	
 	<IncidentDef>
@@ -67,6 +70,7 @@
 		<durationDays>0.25~0.5</durationDays>
 		<letterLabel>overclock</letterLabel>
 		<letterDef>NegativeEvent</letterDef>
+		<baseChance>2</baseChance>
 	</IncidentDef>
 	
 	<IncidentDef>
@@ -81,6 +85,7 @@
 		<durationDays>0.25~0.75</durationDays>
 		<letterLabel>friend-to-foe</letterLabel>
 		<letterDef>NegativeEvent</letterDef>
+		<baseChance>2</baseChance>
 	</IncidentDef>
 	
 	<IncidentDef> 

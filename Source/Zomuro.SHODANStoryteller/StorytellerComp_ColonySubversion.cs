@@ -32,14 +32,15 @@ namespace Zomuro.SHODANStoryteller
 			// add in setting for the subversion incident MTBdays
 			if (Rand.MTBEventOccurs(5f, 60000f, 1000f))
 			{
-				float control = StorytellerUtility.MapCompColonySubversion(target as Map).ControlPercentage;
+				//float control = StorytellerUtility.MapCompColonySubversion(target as Map).ControlPercentage;
+				IncidentParms parms = new IncidentParms();
+				parms.target = target;
 
 				IEnumerable<IncidentDef> possible = Props.subversionIncidents;
 
                 if (!possible.EnumerableNullOrEmpty())
                 {
-					IncidentDef incident = possible.RandomElementByWeight(x => x.baseChance);
-					IncidentParms parms = GenerateParms(incident.category, target);
+					IncidentDef incident = possible.Where(x => x.Worker.CanFireNow(parms)).RandomElementByWeight(x => x.baseChance);
 					yield return new FiringIncident(incident, this, parms);
 				}
 			}

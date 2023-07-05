@@ -144,6 +144,17 @@ namespace Zomuro.SHODANStoryteller
             return false;
         }
 
+        public void CheckOverload()
+        {
+            if(ControlPercentage >= 1f)
+            {
+                IIncidentTarget target = map;
+                IncidentParms parms = new IncidentParms();
+                parms.target = map;
+                parms.points = RimWorld.StorytellerUtility.DefaultThreatPointsNow(target);
+                Find.Storyteller.TryFire(new FiringIncident(IncidentDefOf.Zomuro_SHODAN_ColonySubversion_Incid_Raid, null, parms));
+            }
+        }
 
         public GameCondition_ColonySubversion_LightSap GameConditionLightSap
         {

@@ -11,7 +11,7 @@ namespace Zomuro.SHODANStoryteller
     [DefOf]
     public static class IncidentDefOf
     {
-        //public static IncidentDef Zomuro_SHODAN_Faction;
+        public static IncidentDef Zomuro_SHODAN_ColonySubversion_Incid_Raid;
 
         static IncidentDefOf()
         {

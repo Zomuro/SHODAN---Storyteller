@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<SHODANSetting>SHODAN</SHODANSetting>
+	<SHODANSetting_CD>Cybernetic Domination</SHODANSetting_CD>
+	<SHODANSetting_CD_MoodDebuff>Mood debuff per implant: {0}</SHODANSetting_CD_MoodDebuff>
+	<SHODANSetting_CD_MoodDebuffDesc>Sets the debuff a pawn gets if they gain an implant or additional part at or beyond the industrial tech level.</SHODANSetting_CD_MoodDebuffDesc>
+	<SHODANSetting_CD_ChancePerImplant>Domination chance per implant: {0}</SHODANSetting_CD_ChancePerImplant>
+	<SHODANSetting_CD_ChancePerImplantDesc>Sets how more likely SHODAN will assert control with each additional industrial added part or implant.</SHODANSetting_CD_ChancePerImplantDesc>
+	<SHODANSetting_CD_BrainImplantForce>Force domination w/ brain implant: {0}</SHODANSetting_CD_BrainImplantForce>
+	<SHODANSetting_CD_BrainImplantForceDesc>Toggle if a brain implant will guarantee SHODAN's domination.</SHODANSetting_CD_BrainImplantForceDesc>
+
+	<SHODANSetting_CS>Colony Subversion</SHODANSetting_CS>
+	<SHODANSetting_CS_MTBHack>Mean days for hacking: {0} day(s)</SHODANSetting_CS_MTBHack>
+	<SHODANSetting_CS_MTBHackDesc>Set the average number of days before SHODAN hacks a power trading building.</SHODANSetting_CS_MTBHackDesc>
+	<SHODANSetting_CS_MTBSubversion>Mean days for hacking: {0} day(s)</SHODANSetting_CS_MTBSubversion>
+	<SHODANSetting_CS_MTBSubversionDesc>Set the average number of days before SHODAN tries a subversion incident.</SHODANSetting_CS_MTBSubversionDesc>
+	<SHODANSetting_CS_PowerFlat>Flat power debuff: {0}W</SHODANSetting_CS_PowerFlat>
+	<SHODANSetting_CS_PowerFlatDesc>Sets the flat power requirement debuff at 25% control.</SHODANSetting_CS_PowerFlatDesc>
+	<SHODANSetting_CS_GenFactor>Power generation debuff: {0}</SHODANSetting_CS_GenFactor>
+	<SHODANSetting_CS_GenFactorDesc>Sets the power generation debuff factor at 75% control.</SHODANSetting_CS_GenFactorDesc>
+	<SHODANSetting_CS_ConsumpFactor>Power requirement debuff: {0}</SHODANSetting_CS_ConsumpFactor>
+	<SHODANSetting_CS_ConsumpFactorDesc>Multiplies the power requirement of buildings at 50% control.</SHODANSetting_CS_ConsumpFactorDesc>
+	<SHODANSetting_CS_HeatPush>Overclock heat/s: {}</SHODANSetting_CS_HeatPush>
+	<SHODANSetting_CS_HeatPushDesc>Determines how much heat gets pushed each time a building is damaged during the overclock gamecondition.</SHODANSetting_CS_HeatPushDesc>
+	<SHODANSetting_CS_OverloadBoomChance>Overload explosion chance per building: {0}</SHODANSetting_CS_OverloadBoomChance>
+	<SHODANSetting_CS_OverloadBoomChanceDesc>Sets how likely each individual building is going to explode.</SHODANSetting_CS_OverloadBoomChanceDesc>
+</LanguageData>

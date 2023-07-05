@@ -40,10 +40,10 @@ namespace Zomuro.SHODANStoryteller
 
             // adjust setting here for chance to subvert in case of brain implant
             // and for the option to enable this optional mechanic
-            if (hediffs.FirstOrDefault(x => BrainImplantCheck(x)) != null) return 1f;
+            if (settings.BrainImplantForceDom && hediffs.FirstOrDefault(x => BrainImplantCheck(x)) != null) return 1f;
 
             // adjust setting here for increased prob
-            foreach (var hediff in hediffs) if (TechImplantCheck(hediff)) finalProb += 0.05f;
+            foreach (var hediff in hediffs) if (TechImplantCheck(hediff)) finalProb += settings.BreakChancePerImplant;
 
             return Mathf.Clamp(finalProb, 0, 1f);
         }
@@ -54,6 +54,6 @@ namespace Zomuro.SHODANStoryteller
             return map?.GetComponent<MapComponent_ColonySubversion>();
         }
 
-
+        public static StorytellerSettings settings = LoadedModManager.GetMod<StorytellerMod>().GetSettings<StorytellerSettings>();
     }
 }
