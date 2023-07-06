@@ -30,6 +30,7 @@ namespace Zomuro.SHODANStoryteller
 				// set interval for damage taken in settings
 				if (building.IsHashIntervalTick(180)) 
 				{
+					GenTemperature.PushHeat(building, 3f); // put setting in here
 					building.TakeDamage(dinfo);
 					if (building.Destroyed) affectedHacked.Remove(building);
 				}

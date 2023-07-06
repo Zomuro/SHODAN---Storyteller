@@ -45,6 +45,8 @@ namespace Zomuro.SHODANStoryteller
             // CompGetGizmosExtra_Postfix: adds the unhacking gizmo to comppowertrader buildings
             harmony.Patch(AccessTools.Method(typeof(CompPower), "CompGetGizmosExtra"),
                 null, new HarmonyMethod(typeof(HarmonyPatches), nameof(CompGetGizmosExtra_Postfix)));
+
+
         }
 
         // PREFIX: if a pawn has a mental break, have a chance to force SHODAN's incident
@@ -54,26 +56,13 @@ namespace Zomuro.SHODANStoryteller
             if (Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN)
             {
                 Traverse traverse = Traverse.Create(__instance);
-                //Log.Message("Calc Chance: " + StorytellerUtility.CyberneticDominationChance(traverse.Field("pawn").GetValue<Pawn>()));
-
-                //bool intensityCheck = (intensity != MentalBreakDefOf.Zomuro_SHODAN_CyberneticDomination_Break.intensity);
-                // add setting here to ensure SHODAN's incident can occur on various break intensities
-                // or just on major or extreme for the moment (make sure to add an addition condition for when Cognition Ascension is activated
-                /*Traverse traverse = Traverse.Create(__instance);
-                MentalBreakIntensity intensity = traverse.Method("get_CurrentPossibleMoodBreaks").GetValue<MentalBreakIntensity>();
-                bool cognitionTest = true;
-                bool intensityCheck = intensity == MentalBreakIntensity.Extreme || intensity == MentalBreakIntensity.Major || cognitionTest;*/
-
-
                 if (UnityEngine.Random.Range(0f, 1f) <= StorytellerUtility.CyberneticDominationChance(traverse.Field("pawn").GetValue<Pawn>()))
                 {
                     CyberneticDominationBreakWorker.commonalityCached = 1;
                     __result = new List<MentalBreakDef>() { MentalBreakDefOf.Zomuro_SHODAN_CyberneticDomination_Break };
                     return false;
-                }
-                
+                } 
             }
-
             return true;
         }
 
@@ -96,9 +85,6 @@ namespace Zomuro.SHODANStoryteller
         public static void DeSpawn_Prefix(Building __instance)
         {
             if (__instance.Map is null || !__instance.Map.IsPlayerHome) return;
-
-            //StorytellerUtility.RemoveFromGameCondition(__instance);
-
             MapCompColonySubversion(__instance.Map).RemoveBuilding(__instance);
         }
 
@@ -140,11 +126,10 @@ namespace Zomuro.SHODANStoryteller
                 Messages.Message("Zomuro_SHODAN_CyberneticSubversion_Off".Translate(__instance.parent.Label), __instance.parent, MessageTypeDefOf.RejectInput, true);
                 return false;
             }
-
-
             return true;
         }
 
+        // POSTFIX: adds the unhacking gizmo to comppowertrader buildings
         public static void CompGetGizmosExtra_Postfix(CompPower __instance, ref IEnumerable<Gizmo> __result)
         {
             bool factionCheck = __instance.parent.Faction == Faction.OfPlayer || __instance.parent.Faction == Find.FactionManager.FirstFactionOfDef(FactionDefOf.Zomuro_SHODAN_Faction);
@@ -167,6 +152,21 @@ namespace Zomuro.SHODANStoryteller
 
                 __result = __result.AddItem(gizmo);
             }
+        }
+
+        public static void CompGetGizmosExtra_Postfix(CompPowerTrader __instance, ref float __result)
+        {
+            float num = 0;
+            float flat = 100f;
+            if(__result < 0) // negative power output = consumption
+            {
+                num = Mathf.Clamp(__result * 1.5f - flat, __result, 0);
+            }
+            else // positive power output = generation
+            {
+                num = Mathf.Clamp(__result * 0.5f + flat, 0, __result);
+            }
+            __result = num;
         }
 
         // helper method to nab the right mapcomponent

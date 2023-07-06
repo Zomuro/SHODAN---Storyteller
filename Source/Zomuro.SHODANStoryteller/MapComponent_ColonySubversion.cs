@@ -59,6 +59,7 @@ namespace Zomuro.SHODANStoryteller
             //building.Map.powerNetManager.UpdatePowerNetsAndConnections_First(); // update powernet for later
             dirtyHackable = true; // force recache of hackables linked to powernet
             //Log.Message("Building is hackable: " + building.def.label);
+            CheckOverload();
             return true;
         }
 
@@ -77,7 +78,7 @@ namespace Zomuro.SHODANStoryteller
             RemoveFromGameCondition(building);
             //building.Map.powerNetManager.UpdatePowerNetsAndConnections_First(); // ?? check, since base consumption will be affected
             dirtyHacked = true;
-            
+            CheckOverload();
         }
 
         public void RemoveBuilding(Building building) // used when building is destroyed- force the building to be removed from potential
@@ -87,6 +88,7 @@ namespace Zomuro.SHODANStoryteller
             CleanCache();
             //ClearGameConditionCache();
             RemoveFromGameCondition(building);
+            CheckOverload();
         }
 
         public void CleanAll()
