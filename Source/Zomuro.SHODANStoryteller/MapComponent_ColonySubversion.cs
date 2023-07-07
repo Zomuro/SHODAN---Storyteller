@@ -19,6 +19,8 @@ namespace Zomuro.SHODANStoryteller
 
         public override void MapComponentOnGUI()
         {
+            // adjust to add in a draggable window (small, moveable) that shows all the relevant information
+
             // if the map isn't a player's home, don't bother showing.
             if (Find.Storyteller.def != StorytellerDefOf.Zomuro_SHODAN || map is null || !map.IsPlayerHome) return;
 

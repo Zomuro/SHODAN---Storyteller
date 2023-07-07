@@ -25,6 +25,7 @@ namespace Zomuro.SHODANStoryteller
             {
                 mapComp.potentialHacked.Add(building);
                 mapComp.dirtyHacked = true;
+                mapComp.CheckOverload();
                 return true;
             }
 

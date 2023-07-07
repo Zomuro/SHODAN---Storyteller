@@ -46,6 +46,9 @@ namespace Zomuro.SHODANStoryteller
             harmony.Patch(AccessTools.Method(typeof(CompPower), "CompGetGizmosExtra"),
                 null, new HarmonyMethod(typeof(HarmonyPatches), nameof(CompGetGizmosExtra_Postfix)));
 
+            // get_PowerOutput_Postfix: postfixes the power output to be affected by the mapcomp
+            harmony.Patch(AccessTools.Method(typeof(CompPowerTrader), "get_PowerOutput"),
+                null, new HarmonyMethod(typeof(HarmonyPatches), nameof(get_PowerOutput_Postfix)));
 
         }
 
@@ -154,19 +157,18 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
-        public static void CompGetGizmosExtra_Postfix(CompPowerTrader __instance, ref float __result)
+        public static void get_PowerOutput_Postfix(CompPowerTrader __instance, ref float __result)
         {
-            float num = 0;
-            float flat = 100f;
-            if(__result < 0) // negative power output = consumption
-            {
-                num = Mathf.Clamp(__result * 1.5f - flat, __result, 0);
-            }
-            else // positive power output = generation
-            {
-                num = Mathf.Clamp(__result * 0.5f + flat, 0, __result);
-            }
-            __result = num;
+            float num = __result;
+            if (__instance.parent.Map is null || !__instance.parent.Map.IsPlayerHome) return;
+            MapComponent_ColonySubversion mapComp = MapCompColonySubversion(__instance.parent.Map);
+            if (mapComp is null) return;
+
+            float flat = mapComp.ControlPercentage >= 0.25f ? 0f : 100f; // set setting here 
+            if(__result < 0) 
+                __result = Mathf.Clamp(num * (mapComp.ControlPercentage >= 0.5f ? 1f : 1.5f) - flat, num, 0); // negative power output = consumption
+            else 
+                __result = Mathf.Clamp(num * (mapComp.ControlPercentage >= 0.75f ? 1f : 0.5f) + flat, 0, num); // positive power output = generation
         }
 
         // helper method to nab the right mapcomponent

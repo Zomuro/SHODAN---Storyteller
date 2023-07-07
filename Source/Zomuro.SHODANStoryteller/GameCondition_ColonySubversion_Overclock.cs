@@ -24,7 +24,9 @@ namespace Zomuro.SHODANStoryteller
 
 		public override void GameConditionTick()
 		{
-			HashSet<Building> buildings = affectedHacked;
+			HashSet<Building> buildings = new HashSet<Building>();
+			buildings.AddRange(affectedHacked);
+			//HashSet<Building> remove = new HashSet<Building>();
 			foreach(var building in buildings)
             {
 				// set interval for damage taken in settings
@@ -32,7 +34,6 @@ namespace Zomuro.SHODANStoryteller
 				{
 					GenTemperature.PushHeat(building, 3f); // put setting in here
 					building.TakeDamage(dinfo);
-					if (building.Destroyed) affectedHacked.Remove(building);
 				}
             }
 		}
@@ -42,6 +43,6 @@ namespace Zomuro.SHODANStoryteller
 			base.End();
 		}
 
-		public DamageInfo dinfo = new DamageInfo(DamageDefOf.Flame, 1f, 1f);
+		public DamageInfo dinfo = new DamageInfo(DamageDefOf.Flame, 10f, 1f);
 	}
 }
