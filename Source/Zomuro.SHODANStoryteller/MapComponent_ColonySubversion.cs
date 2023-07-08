@@ -19,7 +19,7 @@ namespace Zomuro.SHODANStoryteller
 
         public override void MapComponentOnGUI()
         {
-            // adjust to add in a draggable window (small, moveable) that shows all the relevant information
+            /*// adjust to add in a draggable window (small, moveable) that shows all the relevant information
 
             // if the map isn't a player's home, don't bother showing.
             if (Find.Storyteller.def != StorytellerDefOf.Zomuro_SHODAN || map is null || !map.IsPlayerHome) return;
@@ -33,7 +33,14 @@ namespace Zomuro.SHODANStoryteller
             return;
 
             // add settings for minimum hackable buildings count
-            if (potentialHackable.EnumerableNullOrEmpty() || potentialHackable.Count() < 7) return;
+            if (potentialHackable.EnumerableNullOrEmpty() || potentialHackable.Count() < 7) return;*/
+
+            if (Find.Storyteller.def != StorytellerDefOf.Zomuro_SHODAN || map is null || !map.IsPlayerHome) return;
+            if (Widgets.ButtonText(new Rect(0, 0, 100, 50), "PDA", true, true, true, TextAnchor.MiddleCenter))
+            {
+                if (!Find.WindowStack.IsOpen(typeof(Dialog_ColonySubversion))) Find.WindowStack.Add(new Dialog_ColonySubversion());
+                else Find.WindowStack.TryRemove(typeof(Dialog_ColonySubversion));
+            }
 
             
         }
@@ -43,7 +50,7 @@ namespace Zomuro.SHODANStoryteller
             get
             {
                 if (Hackable.EnumerableNullOrEmpty()) return -1f;
-                return Hacked.Count() / Hackable.Count();
+                return 1f * Hacked.Count() / Hackable.Count();
             }
         }
 

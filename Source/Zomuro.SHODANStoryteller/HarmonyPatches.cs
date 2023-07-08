@@ -157,6 +157,7 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
+        // POSTFIX: alters the power output (generation and consumption) depending on SHODAN's control level
         public static void get_PowerOutput_Postfix(CompPowerTrader __instance, ref float __result)
         {
             float num = __result;

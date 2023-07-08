@@ -55,8 +55,13 @@
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialog_ColonySubversion.cs" />
     <Compile Include="StorytellerMod.cs" />
     <Compile Include="StorytellerSettings.cs" />
     <Compile Include="IncidentWorker_ColonySubversion_ClimateSuspend.cs" />
