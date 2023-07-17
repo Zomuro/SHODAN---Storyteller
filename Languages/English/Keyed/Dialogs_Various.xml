@@ -1,0 +1,14 @@
+<LanguageData> 
+	
+	<!-- Dialog_ColonySubversion -->
+	<SHODAN_CS_BarTitle>Network Corruption</SHODAN_CS_BarTitle>
+	<SHODAN_CS_BarError>ERROR</SHODAN_CS_BarError>
+	<SHODAN_CS_NullMap>No component network detected.</SHODAN_CS_NullMap>
+	<SHODAN_CS_NotPlayerHome>No access to the network.\n\nUsage of the TriOptimum (R) Personal Diagnostic Assistant in an unauthorized setting will void any and all protections on it.</SHODAN_CS_NotPlayerHome>
+	<SHODAN_CS_LowNodeCount>Poor network integrity due to low node count. The observer is unable to accurately assess control levels.\n\nPlease add additional units to the grid in order to improve stability.</SHODAN_CS_LowNodeCount>
+	<SHODAN_CS_PassiveLog>Logged Issues:</SHODAN_CS_PassiveLog>
+	<SHODAN_CS_Passive25>\n* (25%) Power delivery and reception issues.</SHODAN_CS_Passive25>
+	<SHODAN_CS_Passive50>\n* (50%) Power consumption increased.</SHODAN_CS_Passive50>
+	<SHODAN_CS_Passive75>\n* (75%) Power generation decreased.</SHODAN_CS_Passive75>
+	
+ </LanguageData>

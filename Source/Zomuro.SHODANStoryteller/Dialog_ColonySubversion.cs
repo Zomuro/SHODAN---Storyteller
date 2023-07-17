@@ -30,7 +30,7 @@ namespace Zomuro.SHODANStoryteller
 
         public Dialog_ColonySubversion() 
         {
-            //KarmaRing = ContentFinder<Texture2D>.Get("UI/Dialogs/KaiyiKarmicRing", true);
+            TriOptPic = ContentFinder<Texture2D>.Get("UI/Dialogs/TriOptLogo", true);
             draggable = true;
             preventCameraMotion = false;
             closeOnClickedOutside = false;
@@ -52,11 +52,11 @@ namespace Zomuro.SHODANStoryteller
             Widgets.BeginGroup(inRect);
 
             // Top half - TriOptimum logo
-            Rect topHalf = new Rect(0, 0, inRect.width, inRect.height);
-            //Widgets.DrawTextureFitted(topHalf.ContractedBy(5), TriOptPic, 0.95f);
+            Rect topHalf = new Rect(0, 0, inRect.width, inRect.height / 2);
+            Widgets.DrawTextureFitted(topHalf.ContractedBy(5), TriOptPic, 0.95f);
 
             // Bottom half - critical mapcomp information
-            Rect bottomPart = new Rect(0, inRect.height / 2f, inRect.width, inRect.height * 2f);
+            Rect bottomPart = new Rect(0, inRect.height / 2f, inRect.width, inRect.height / 2f);
             Rect barRect = new Rect(bottomPart);
             barRect = barRect.ContractedBy(5);
             barRect.y = bottomPart.y;
@@ -64,23 +64,23 @@ namespace Zomuro.SHODANStoryteller
 
             // Label of bar
             Text.Anchor = TextAnchor.MiddleCenter;
-            Widgets.Label(barRect, "Network Corruption");
+            Widgets.Label(barRect, "SHODAN_CS_BarTitle".Translate());
             barRect.y += barRect.height;
 
             Rect infoRect = new Rect(bottomPart);
             infoRect.yMin = barRect.yMax;
             infoRect.ContractedBy(10f);
 
-            if (Find.CurrentMap is null) Widgets.Label(bottomPart, "No component network detected"); // in theory this case shouldn't happen ; // create keyed string for this
+            if (Find.CurrentMap is null) Widgets.Label(bottomPart, "SHODAN_CS_NullMap".Translate()); // in theory this case shouldn't happen ; // create keyed string for this
             else if (!Find.CurrentMap.IsPlayerHome)
             {
                 Widgets.FillableBar(barRect, 1f, ErrorTex, EmptyBarTex, true);
-                Widgets.Label(barRect, "ERROR");
+                Widgets.Label(barRect, "SHODAN_CS_BarError".Translate());
 
                 Text.Anchor = TextAnchor.UpperLeft;
                 Text.Font = GameFont.Tiny;
                 // create keyed string for this
-                Widgets.Label(infoRect, "No access to the network.\n\nUsage of the TriOptimum (R) Personal Diagnostic Assistant in an unauthorized setting will void any and all protections on it."); // create keyed string for this
+                Widgets.Label(infoRect, "SHODAN_CS_NotPlayerHome".Translate()); // create keyed string for this
                 Text.Font = GameFont.Small;
                
             }
@@ -91,27 +91,16 @@ namespace Zomuro.SHODANStoryteller
                 {
                     // Draw bar of control level
                     Widgets.FillableBar(barRect, 1f, ErrorTex, EmptyBarTex, true);
-                    Widgets.Label(barRect, "ERROR");
+                    Widgets.Label(barRect, "SHODAN_CS_BarError".Translate());
 
                     Text.Anchor = TextAnchor.UpperLeft;
                     Text.Font = GameFont.Tiny;
                     // create keyed string for this
-                    Widgets.Label(infoRect, "Poor network integrity due to low node count. The observer is unable to accurately assess control levels." +
-                        "\n\nPlease add additional units to the grid in order to improve stability.");
+                    Widgets.Label(infoRect, "SHODAN_CS_LowNodeCount".Translate());
                     Text.Font = GameFont.Small;
                 }
                 else
                 {
-                    /*Rect barRect = new Rect(bottomPart);
-                    barRect = barRect.ContractedBy(5);
-                    barRect.y = bottomPart.y;
-                    barRect.height = 25;
-                    
-                    // Label of bar
-                    Text.Anchor = TextAnchor.MiddleCenter;
-                    Widgets.Label(barRect, "Network Infection");
-                    barRect.y += barRect.height;*/
-
                     // Draw bar of control level
                     Widgets.FillableBar(barRect, mapComp.ControlPercentage, TriOptTex, EmptyBarTex, true);
                     Widgets.Label(barRect, mapComp.ControlPercentage.ToStringPercent());
@@ -119,10 +108,10 @@ namespace Zomuro.SHODANStoryteller
                     // Draw information on effects of control level
                     Text.Anchor = TextAnchor.UpperLeft;
                     Text.Font = GameFont.Tiny;
-                    string text = "Logged Issues: ";
-                    if (mapComp.ControlPercentage >= 0.25f) text += "\n* (25%) Power delivery and reception issues.";
-                    if (mapComp.ControlPercentage >= 0.5f) text += "\n* (50%) Power consumption increased.";
-                    if (mapComp.ControlPercentage >= 0.75f) text += "\n* (75%) Power generation decreased.";
+                    string text = "SHODAN_CS_PassiveLog".Translate();
+                    if (mapComp.ControlPercentage >= 0.25f) text += "SHODAN_CS_Passive25".Translate();
+                    if (mapComp.ControlPercentage >= 0.5f) text += "SHODAN_CS_Passive50".Translate();
+                    if (mapComp.ControlPercentage >= 0.75f) text += "SHODAN_CS_Passive75".Translate();
                     Widgets.Label(infoRect, text);
 
                     Text.Font = GameFont.Small;

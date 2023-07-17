@@ -19,22 +19,6 @@ namespace Zomuro.SHODANStoryteller
 
         public override void MapComponentOnGUI()
         {
-            /*// adjust to add in a draggable window (small, moveable) that shows all the relevant information
-
-            // if the map isn't a player's home, don't bother showing.
-            if (Find.Storyteller.def != StorytellerDefOf.Zomuro_SHODAN || map is null || !map.IsPlayerHome) return;
-
-            Widgets.BeginGroup(new Rect(0, 0, 200, 200));
-
-            if (Hackable.Count() < 5) Widgets.Label(new Rect(0, 0, 100, 100), "Not enough buildings");
-            else Widgets.Label(new Rect(0, 0, 100, 100), "{0} / {1}".Formatted(Hacked.Count(), Hackable.Count()));
-
-            Widgets.EndGroup();
-            return;
-
-            // add settings for minimum hackable buildings count
-            if (potentialHackable.EnumerableNullOrEmpty() || potentialHackable.Count() < 7) return;*/
-
             if (Find.Storyteller.def != StorytellerDefOf.Zomuro_SHODAN || map is null || !map.IsPlayerHome) return;
             if (Widgets.ButtonText(new Rect(0, 0, 100, 50), "PDA", true, true, true, TextAnchor.MiddleCenter))
             {
@@ -67,7 +51,6 @@ namespace Zomuro.SHODANStoryteller
             potentialHackable.Add(building);
             //building.Map.powerNetManager.UpdatePowerNetsAndConnections_First(); // update powernet for later
             dirtyHackable = true; // force recache of hackables linked to powernet
-            //Log.Message("Building is hackable: " + building.def.label);
             CheckOverload();
             return true;
         }

@@ -172,6 +172,31 @@ namespace Zomuro.SHODANStoryteller
                 __result = Mathf.Clamp(num * (mapComp.ControlPercentage >= 0.75f ? 1f : 0.5f) + flat, 0, num); // positive power output = generation
         }
 
+        // PREFIX: adds a PDA viewing gizmo that can be used to pull up the dialog
+        public static bool GetGizmos_Prefix(Pawn __instance, ref IEnumerable<Gizmo> __result)
+        {
+            // only for pawns on a map, only for colonists
+            bool factionCheck = __instance.Map != null && __instance.IsColonist;
+            if (Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN && factionCheck)
+            {
+                Gizmo gizmo = new Command_Action
+                {
+                    //icon = Traverse.Create(__instance).Property("CommandTex").GetValue<Texture2D>(), // get custom texture
+                    defaultLabel = "Zomuro_SHODAN_CS_ViewLabel".Translate(),
+                    defaultDesc = "Zomuro_SHODAN_CS_ViewDesc".Translate(),
+                    action = delegate ()
+                    {
+                        if (!Find.WindowStack.IsOpen(typeof(Dialog_ColonySubversion))) Find.WindowStack.Add(new Dialog_ColonySubversion());
+                        else Find.WindowStack.TryRemove(typeof(Dialog_ColonySubversion));
+                    }
+                };
+                __result = __result.AddItem(gizmo);
+
+                
+            }
+            return true;
+        }
+
         // helper method to nab the right mapcomponent
         public static MapComponent_ColonySubversion MapCompColonySubversion(Map map)
         {
