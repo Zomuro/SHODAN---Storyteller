@@ -50,6 +50,10 @@ namespace Zomuro.SHODANStoryteller
             harmony.Patch(AccessTools.Method(typeof(CompPowerTrader), "get_PowerOutput"),
                 null, new HarmonyMethod(typeof(HarmonyPatches), nameof(get_PowerOutput_Postfix)));
 
+            // GetGizmos_Postfix: adds a gizmo that allows a pawn to access the PDA.
+            harmony.Patch(AccessTools.Method(typeof(Pawn), "GetGizmos"),
+                null, new HarmonyMethod(typeof(HarmonyPatches), nameof(GetGizmos_Postfix)));
+
         }
 
         // PREFIX: if a pawn has a mental break, have a chance to force SHODAN's incident
@@ -75,6 +79,48 @@ namespace Zomuro.SHODANStoryteller
             {
                 return (MentalBreakDefOf.Zomuro_SHODAN_CyberneticDomination_Break.Worker as MentalBreakWorker_CyberneticDomination);
             }
+        }
+
+        public static IEnumerable<Thing> ButcherProducts_Postfix(Pawn __0)
+        {
+            IEnumerable<Thing> products = ImplantProducts(__0);
+            if (products.EnumerableNullOrEmpty()) yield break;
+            foreach (var item in products) yield return item;
+            yield break;
+        }
+
+
+        public static IEnumerable<Thing> ImplantProducts(Pawn pawn)
+        {
+            //Pawn pawn = thing as Pawn;
+            //if (pawn is null) yield break;
+
+            foreach(var hediff in pawn.health.hediffSet.hediffs)
+            {
+                if (!hediff.def.countsAsAddedPartOrImplant) continue; // if this isn't an implant, skip
+
+                // if this thing doesn't spawn a thing on removal, just spawn a component
+                if(hediff.def.spawnThingOnRemoved is null)
+                {
+                    yield return ThingMaker.MakeThing(ThingDefOf.ComponentIndustrial, null);
+                    continue;
+                }
+
+                // but if it doest spawn a thing on removal and succeeds the chance, spawn the implant item
+                if(UnityEngine.Random.Range(0f,1f) <= 0.15f) yield return ThingMaker.MakeThing(hediff.def.spawnThingOnRemoved, null);
+                else // failing the chance will spawn a portion of the components used in the implant
+                {
+                    foreach(var thingCount in hediff.def.spawnThingOnRemoved.costList)
+                    {
+                        if(thingCount.thingDef == ThingDefOf.ComponentIndustrial || thingCount.thingDef == ThingDefOf.ComponentSpacer) continue;
+                        Thing component = ThingMaker.MakeThing(thingCount.thingDef, null);
+                        component.stackCount = Mathf.FloorToInt(0.25f * thingCount.count);
+                        yield return component;
+                    }
+                }
+            }
+
+            yield break;
         }
 
         // POSTFIX: when a building is spawned, verify it can be added before adding a building to the mapcomp hackable list.
@@ -166,22 +212,24 @@ namespace Zomuro.SHODANStoryteller
             if (mapComp is null) return;
 
             float flat = mapComp.ControlPercentage >= 0.25f ? 0f : 100f; // set setting here 
+
+            // add control percent scaling here
             if(__result < 0) 
                 __result = Mathf.Clamp(num * (mapComp.ControlPercentage >= 0.5f ? 1f : 1.5f) - flat, num, 0); // negative power output = consumption
             else 
                 __result = Mathf.Clamp(num * (mapComp.ControlPercentage >= 0.75f ? 1f : 0.5f) + flat, 0, num); // positive power output = generation
         }
 
-        // PREFIX: adds a PDA viewing gizmo that can be used to pull up the dialog
-        public static bool GetGizmos_Prefix(Pawn __instance, ref IEnumerable<Gizmo> __result)
+        // POSTFIX: adds a PDA viewing gizmo that can be used to pull up the dialog
+        public static void GetGizmos_Postfix(Pawn __instance, ref IEnumerable<Gizmo> __result)
         {
             // only for pawns on a map, only for colonists
-            bool factionCheck = __instance.Map != null && __instance.IsColonist;
-            if (Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN && factionCheck)
+            // IEnumerable<Gizmo> gizmos = __result;
+            if (Find.Storyteller.def == StorytellerDefOf.Zomuro_SHODAN && __instance.Map != null && __instance.IsColonist)
             {
                 Gizmo gizmo = new Command_Action
                 {
-                    //icon = Traverse.Create(__instance).Property("CommandTex").GetValue<Texture2D>(), // get custom texture
+                    icon = ContentFinder<Texture2D>.Get("UI/Dialogs/TriOptLogo", true), // get custom texture
                     defaultLabel = "Zomuro_SHODAN_CS_ViewLabel".Translate(),
                     defaultDesc = "Zomuro_SHODAN_CS_ViewDesc".Translate(),
                     action = delegate ()
@@ -191,10 +239,7 @@ namespace Zomuro.SHODANStoryteller
                     }
                 };
                 __result = __result.AddItem(gizmo);
-
-                
             }
-            return true;
         }
 
         // helper method to nab the right mapcomponent

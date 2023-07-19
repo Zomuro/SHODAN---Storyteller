@@ -30,11 +30,11 @@ namespace Zomuro.SHODANStoryteller
 
         public Dialog_ColonySubversion() 
         {
-            TriOptPic = ContentFinder<Texture2D>.Get("UI/Dialogs/TriOptLogo", true);
+            TriOptPic = ContentFinder<Texture2D>.Get("UI/Dialogs/TriOptFullLogo", true);
             draggable = true;
-            preventCameraMotion = false;
-            closeOnClickedOutside = false;
-            forcePause = false;
+            preventCameraMotion = false; // allow the player to scroll around
+            closeOnClickedOutside = true; // immersion element- can't check the PDA AND perform other tasks at the same time
+            forcePause = false; // shouldn't stop the game
             closeOnCancel = true;
             doCloseX = true;
         }
@@ -43,7 +43,7 @@ namespace Zomuro.SHODANStoryteller
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Small;
-            if (Find.Storyteller.def != StorytellerDefOf.Zomuro_SHODAN || Find.CurrentMap is null || !Find.CurrentMap.IsPlayerHome)
+            if (Find.Storyteller.def != StorytellerDefOf.Zomuro_SHODAN || Find.CurrentMap is null) // failsafe scenario
             {
                 Close();
                 return;
@@ -53,13 +53,19 @@ namespace Zomuro.SHODANStoryteller
 
             // Top half - TriOptimum logo
             Rect topHalf = new Rect(0, 0, inRect.width, inRect.height / 2);
-            Widgets.DrawTextureFitted(topHalf.ContractedBy(5), TriOptPic, 0.95f);
+            Widgets.DrawTextureFitted(topHalf, TriOptPic, 1f);
+
+            // draw horizontal line to split
+            Color orgCol = GUI.color;
+            GUI.color = Color.grey;
+            Widgets.DrawLineHorizontal(0, inRect.height / 2f, inRect.width);
+            GUI.color = orgCol;
 
             // Bottom half - critical mapcomp information
             Rect bottomPart = new Rect(0, inRect.height / 2f, inRect.width, inRect.height / 2f);
             Rect barRect = new Rect(bottomPart);
             barRect = barRect.ContractedBy(5);
-            barRect.y = bottomPart.y;
+            barRect.yMin = bottomPart.y;
             barRect.height = 25;
 
             // Label of bar
@@ -87,7 +93,7 @@ namespace Zomuro.SHODANStoryteller
             else
             {
                 MapComponent_ColonySubversion mapComp =  StorytellerUtility.MapCompColonySubversion(Find.CurrentMap);
-                if (mapComp.Hackable.Count() <= 10)
+                if (mapComp.Hackable.Count() <= 10) // add setting- if the hackable items in the map are less than a certain amount, creates a bar to prevent SHODAN from instantly forcing a raid
                 {
                     // Draw bar of control level
                     Widgets.FillableBar(barRect, 1f, ErrorTex, EmptyBarTex, true);

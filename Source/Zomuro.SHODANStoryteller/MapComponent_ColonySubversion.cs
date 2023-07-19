@@ -17,7 +17,7 @@ namespace Zomuro.SHODANStoryteller
             this.map = map;
         }
 
-        public override void MapComponentOnGUI()
+        /*public override void MapComponentOnGUI()
         {
             if (Find.Storyteller.def != StorytellerDefOf.Zomuro_SHODAN || map is null || !map.IsPlayerHome) return;
             if (Widgets.ButtonText(new Rect(0, 0, 100, 50), "PDA", true, true, true, TextAnchor.MiddleCenter))
@@ -27,7 +27,7 @@ namespace Zomuro.SHODANStoryteller
             }
 
             
-        }
+        }*/
 
         public float ControlPercentage
         {
