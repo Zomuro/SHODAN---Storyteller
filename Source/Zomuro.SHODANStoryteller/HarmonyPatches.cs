@@ -18,10 +18,16 @@ namespace Zomuro.SHODANStoryteller
         {
             Harmony harmony = new Harmony("Zomuro.SHODANStoryteller");
 
+            // Cybernetic Domination //
             // CurrentPossibleMoodBreaks_Prefix: if a pawn has a mental break, have chance to force SHODAN's incident
             harmony.Patch(AccessTools.Method(typeof(MentalBreaker), "get_CurrentPossibleMoodBreaks"),
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(CurrentPossibleMoodBreaks_Prefix)));
 
+            // ButcherProducts_Postfix: adds a chance for any added part/implants to be added to the butcher products
+            harmony.Patch(AccessTools.Method(typeof(Corpse), "ButcherProducts"),
+                null, new HarmonyMethod(typeof(HarmonyPatches), nameof(ButcherProducts_Postfix)));
+
+            // Colony Subversion //
             // SpawnSetup_Postfix: when a building is spawned, verify it can be added before adding a building to the hackable list.
             harmony.Patch(AccessTools.Method(typeof(Building), "SpawnSetup"),
                 null, new HarmonyMethod(typeof(HarmonyPatches), nameof(SpawnSetup_Postfix)));
@@ -81,40 +87,40 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
-        public static IEnumerable<Thing> ButcherProducts_Postfix(Pawn __0)
+        public static void ButcherProducts_Postfix(Corpse __instance, ref IEnumerable<Thing> __result)
         {
-            IEnumerable<Thing> products = ImplantProducts(__0);
-            if (products.EnumerableNullOrEmpty()) yield break;
-            foreach (var item in products) yield return item;
-            yield break;
+            if (__instance.InnerPawn is null) return;
+            IEnumerable<Thing> products = ImplantProducts(__instance.InnerPawn);
+            if (products.EnumerableNullOrEmpty()) return;
+
+            List<Thing> finalProd = __result.ToList();
+            finalProd.AddRange(products);
+            __result = finalProd;
         }
 
 
         public static IEnumerable<Thing> ImplantProducts(Pawn pawn)
         {
-            //Pawn pawn = thing as Pawn;
-            //if (pawn is null) yield break;
-
             foreach(var hediff in pawn.health.hediffSet.hediffs)
             {
-                if (!hediff.def.countsAsAddedPartOrImplant) continue; // if this isn't an implant, skip
-
-                // if this thing doesn't spawn a thing on removal, just spawn a component
-                if(hediff.def.spawnThingOnRemoved is null)
+                if (!hediff.def.countsAsAddedPartOrImplant) continue; // if this isn't an implant/added part, skip
+                if(hediff.def.spawnThingOnRemoved is null)  // if this thing doesn't spawn a thing on removal, just spawn a component
                 {
                     yield return ThingMaker.MakeThing(ThingDefOf.ComponentIndustrial, null);
                     continue;
                 }
 
-                // but if it doest spawn a thing on removal and succeeds the chance, spawn the implant item
-                if(UnityEngine.Random.Range(0f,1f) <= 0.15f) yield return ThingMaker.MakeThing(hediff.def.spawnThingOnRemoved, null);
-                else // failing the chance will spawn a portion of the components used in the implant
+                // but if it doesn't spawn a thing on removal and succeeds the rng roll, spawn the implant item
+                if(UnityEngine.Random.Range(0f,1f) <= 1f) yield return ThingMaker.MakeThing(hediff.def.spawnThingOnRemoved, null);
+                else // failing the chance will spawn a portion of the components used in the implant instead
                 {
-                    foreach(var thingCount in hediff.def.spawnThingOnRemoved.costList)
+                    // no cost list (things used to make the implant)? skip it
+                    if (hediff.def.spawnThingOnRemoved.costList.NullOrEmpty()) continue;
+                    foreach(var thingCount in hediff.def.spawnThingOnRemoved.costList) // spawn components
                     {
                         if(thingCount.thingDef == ThingDefOf.ComponentIndustrial || thingCount.thingDef == ThingDefOf.ComponentSpacer) continue;
                         Thing component = ThingMaker.MakeThing(thingCount.thingDef, null);
-                        component.stackCount = Mathf.FloorToInt(0.25f * thingCount.count);
+                        component.stackCount = Mathf.FloorToInt(0.25f * thingCount.count); // add settings of the chance for component retrieval
                         yield return component;
                     }
                 }

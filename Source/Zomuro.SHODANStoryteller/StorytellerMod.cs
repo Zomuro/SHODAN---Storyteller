@@ -88,13 +88,15 @@ namespace Zomuro.SHODANStoryteller
             settings.MoodDebuffPerImplant = 2f;
             settings.BreakChancePerImplant = 0.1f;
             settings.BrainImplantForceDom = false;
+            settings.ImplantExtractChance = 0.15f;
+            settings.ComponentSalvageProp = 0.25f;
         }
 
         public void ColonySubversionReset()
         {
             settings.MTBDaysHack = 1.5f;
             settings.MTBDaysSubversions = 5f;
-            settings.PowerFlatIncrease = 100f;
+            settings.PowerFlatDebuff = 100f;
             settings.PowerGenerationFactor = 0.5f;
             settings.PowerConsumptionFactor = 1.5f;
             settings.OverloadBoomChance = 0.15f;
@@ -103,7 +105,7 @@ namespace Zomuro.SHODANStoryteller
 
         public void CyberneticDominationSettings(ref Listing_Standard listing)
         {
-            // Farseer Fan
+            // title of settings
             Text.Font = GameFont.Medium;
             listing.Label("Cybernetic Domination");
             Text.Font = GameFont.Small;
@@ -112,11 +114,17 @@ namespace Zomuro.SHODANStoryteller
             listing.Label("SHODANSetting_CD_MoodDebuff".Translate(settings.MoodDebuffPerImplant), -1, "SHODANSetting_CD_MoodDebuffDesc".Translate());
             settings.MoodDebuffPerImplant = listing.Slider((int)settings.MoodDebuffPerImplant, 0f, 5f);
 
-            listing.Label("SHODANSetting_CD_ChancePerImplant".Translate(settings.BreakChancePerImplant), -1, "SHODANSetting_CD_ChancePerImplantDesc".Translate());
-            settings.BreakChancePerImplant = listing.Slider((float)settings.BreakChancePerImplant, 0f, 1f);
+            listing.Label("SHODANSetting_CD_ChancePerImplant".Translate(settings.BreakChancePerImplant.ToStringPercentEmptyZero()), -1, "SHODANSetting_CD_ChancePerImplantDesc".Translate());
+            settings.BreakChancePerImplant = listing.Slider((float)RoundToNearestHundredth(settings.BreakChancePerImplant), 0f, 1f);
 
             listing.CheckboxLabeled("SHODANSetting_CD_BrainImplantForce".Translate(settings.BrainImplantForceDom.ToString()),
                 ref settings.BrainImplantForceDom, "SHODANSetting_CD_BrainImplantForceDesc".Translate());
+
+            listing.Label("SHODANSetting_CD_ImplantExtractChance".Translate(settings.ImplantExtractChance.ToStringPercentEmptyZero()), -1, "SHODANSetting_CD_ImplantExtractChanceDesc".Translate());
+            settings.ImplantExtractChance = listing.Slider((float) RoundToNearest5Percent(settings.ImplantExtractChance), 0f, 1f);
+
+            listing.Label("SHODANSetting_CD_ComponentProp".Translate(settings.ComponentSalvageProp.ToStringPercentEmptyZero()), -1, "SHODANSetting_CD_ComponentPropDesc".Translate());
+            settings.ComponentSalvageProp = listing.Slider((float) RoundToNearestTenth(settings.ComponentSalvageProp), 0f, 1f);
 
             listing.Gap(16f);
             if (listing.ButtonText("Reset to default"))
@@ -125,6 +133,21 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
+
+        public float RoundToNearest5Percent(float number)
+        {
+            return Mathf.Round(number * 20f) / 20f;
+        }
+
+        public float RoundToNearestTenth(float number)
+        {
+            return Mathf.Round(number * 10f) / 10f;
+        }
+
+        public float RoundToNearestHundredth(float number)
+        {
+            return Mathf.Round(number * 100f) / 100f;
+        }
 
 
 

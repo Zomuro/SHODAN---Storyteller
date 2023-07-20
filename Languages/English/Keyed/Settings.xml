@@ -8,12 +8,18 @@
 	<SHODANSetting_CD_ChancePerImplantDesc>Sets how more likely SHODAN will assert control with each additional industrial added part or implant.</SHODANSetting_CD_ChancePerImplantDesc>
 	<SHODANSetting_CD_BrainImplantForce>Force domination w/ brain implant: {0}</SHODANSetting_CD_BrainImplantForce>
 	<SHODANSetting_CD_BrainImplantForceDesc>Toggle if a brain implant will guarantee SHODAN's domination.</SHODANSetting_CD_BrainImplantForceDesc>
+	<SHODANSetting_CD_ImplantExtractChance>Implant extraction chance: {0}</SHODANSetting_CD_ImplantExtractChance>
+	<SHODANSetting_CD_ImplantExtractChanceDesc>Set the probability a pawn will drop an implant/added part when they are disassembled/butchered.</SHODANSetting_CD_ImplantExtractChanceDesc>
+	<SHODANSetting_CD_ComponentProp>Percent of components salvaged: {0}</SHODANSetting_CD_ComponentProp>
+	<SHODANSetting_CD_ComponentPropDesc>If disassembly/butchering fails to extract an implant, the extraction process will instead return the components used to make it.\n\nThis setting determines what proportion of those components will drop.</SHODANSetting_CD_ComponentPropDesc>
 
 	<SHODANSetting_CS>Colony Subversion</SHODANSetting_CS>
 	<SHODANSetting_CS_MTBHack>Mean days for hacking: {0} day(s)</SHODANSetting_CS_MTBHack>
 	<SHODANSetting_CS_MTBHackDesc>Set the average number of days before SHODAN hacks a power trading building.</SHODANSetting_CS_MTBHackDesc>
 	<SHODANSetting_CS_MTBSubversion>Mean days for hacking: {0} day(s)</SHODANSetting_CS_MTBSubversion>
 	<SHODANSetting_CS_MTBSubversionDesc>Set the average number of days before SHODAN tries a subversion incident.</SHODANSetting_CS_MTBSubversionDesc>
+	<SHODANSetting_CS_BasePowerFactor>Base additive power factor: {0}x</SHODANSetting_CS_BasePowerFactor>
+	<SHODANSetting_CS_BasePowerFactorDesc>Sets how much more or less power a building generates or consumes respectively by default.</SHODANSetting_CS_BasePowerFactorDesc>
 	<SHODANSetting_CS_PowerFlat>Flat power debuff: {0}W</SHODANSetting_CS_PowerFlat>
 	<SHODANSetting_CS_PowerFlatDesc>Sets the flat power requirement debuff at 25% control.</SHODANSetting_CS_PowerFlatDesc>
 	<SHODANSetting_CS_GenFactor>Power generation debuff: {0}</SHODANSetting_CS_GenFactor>
