@@ -28,15 +28,17 @@ namespace Zomuro.SHODANStoryteller
 
         public float MTBDaysSubversions = 5f;
 
-        public float OverclockHeatPush = 1f;
-
         public float BasePowerFactor = 0.25f;
 
         public float PowerFlatDebuff = 100f;
 
-        public float PowerGenerationFactor = 0.5f;
+        public float PowerGenerationFactor = 0.5f; // maybe don't bother with these
 
-        public float PowerConsumptionFactor = 1.5f;
+        public float PowerConsumptionFactor = 1.5f; // maybe don't bother with these
+
+        public float OverclockHeatPush = 3f;
+
+        public float OverclockHeatDmg = 3f; // check
 
         public float OverloadBoomChance = 0.15f;
 
@@ -56,8 +58,8 @@ namespace Zomuro.SHODANStoryteller
             Scribe_Values.Look(ref PowerFlatDebuff, "PowerFlatIncrease");
             Scribe_Values.Look(ref PowerGenerationFactor, "PowerGenerationFactor");
             Scribe_Values.Look(ref PowerConsumptionFactor, "PowerConsumptionFactor");
-            Scribe_Values.Look(ref OverloadBoomChance, "OverloadBoomChance");
             Scribe_Values.Look(ref OverclockHeatPush, "OverclockHeatPush");
+            Scribe_Values.Look(ref OverloadBoomChance, "OverloadBoomChance");
 
             base.ExposeData();
         }

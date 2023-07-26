@@ -68,6 +68,9 @@ namespace Zomuro.SHODANStoryteller
                 case Tab.CyberneticDomination:
                     CyberneticDominationSettings(ref listing);
                     break;
+                case Tab.ColonySubversion:
+                    ColonySubversionSettings(ref listing);
+                    break;
                 default: break;
             }
 
@@ -96,18 +99,19 @@ namespace Zomuro.SHODANStoryteller
         {
             settings.MTBDaysHack = 1.5f;
             settings.MTBDaysSubversions = 5f;
+            settings.BasePowerFactor = 0.25f;
             settings.PowerFlatDebuff = 100f;
-            settings.PowerGenerationFactor = 0.5f;
-            settings.PowerConsumptionFactor = 1.5f;
+            //settings.PowerGenerationFactor = 0.5f;
+            //settings.PowerConsumptionFactor = 1.5f;
+            settings.OverclockHeatPush = 3f;
             settings.OverloadBoomChance = 0.15f;
-            settings.OverclockHeatPush = 1f;
         }
 
         public void CyberneticDominationSettings(ref Listing_Standard listing)
         {
             // title of settings
             Text.Font = GameFont.Medium;
-            listing.Label("Cybernetic Domination");
+            listing.Label("SHODANSetting_CD".Translate());
             Text.Font = GameFont.Small;
             listing.GapLine();
 
@@ -130,6 +134,48 @@ namespace Zomuro.SHODANStoryteller
             if (listing.ButtonText("Reset to default"))
             {
                 CyberneticDominationReset();
+            }
+        }
+
+        public void ColonySubversionSettings(ref Listing_Standard listing)
+        {
+            // title of settings
+            Text.Font = GameFont.Medium;
+            listing.Label("SHODANSetting_CS".Translate());
+            Text.Font = GameFont.Small;
+            listing.GapLine();
+
+            listing.Label("SHODANSetting_CS_MTBHack".Translate(settings.MTBDaysHack.ToString("F1")), -1, "SHODANSetting_CS_MTBHackDesc".Translate());
+            settings.MTBDaysHack = listing.Slider((float) RoundToNearestTenth(settings.MTBDaysHack), 0.5f, 5f);
+
+            listing.Label("SHODANSetting_CS_MTBSubversion".Translate(settings.MTBDaysSubversions.ToString("F1")), -1, "SHODANSetting_CS_MTBSubversionDesc".Translate());
+            settings.MTBDaysSubversions = listing.Slider((float) RoundToNearestTenth(settings.MTBDaysSubversions), 3f, 10f);
+
+            listing.Label("SHODANSetting_CS_BasePowerFactor".Translate((1f + settings.BasePowerFactor).ToString("F2")), -1, 
+                "SHODANSetting_CS_BasePowerFactorDesc".Translate());
+            settings.BasePowerFactor = listing.Slider((float)RoundToNearest5Percent(settings.BasePowerFactor), -0.5f, 0.5f);
+
+            listing.Label("SHODANSetting_CS_PowerFlat".Translate(settings.PowerFlatDebuff), -1, "SHODANSetting_CS_PowerFlatDesc".Translate());
+            settings.PowerFlatDebuff = listing.Slider((int)settings.PowerFlatDebuff, 0f, 200f);
+
+            /*listing.Label("SHODANSetting_CS_ConsumpFactor".Translate(settings.PowerConsumptionFactor), -1, "SHODANSetting_CS_ConsumpFactorDesc".Translate());
+            settings.PowerConsumptionFactor = listing.Slider((int)settings.PowerConsumptionFactor, 0f, 200f);
+
+            listing.Label("SHODANSetting_CS_GenFactor".Translate(settings.PowerFlatDebuff), -1, "SHODANSetting_CS_GenFactorDesc".Translate());
+            settings.PowerFlatDebuff = listing.Slider((int)settings.PowerFlatDebuff, 0f, 200f);*/
+
+            listing.Label("SHODANSetting_CS_HeatPush".Translate(settings.OverclockHeatPush), -1, "SHODANSetting_CS_HeatPushDesc".Translate());
+            settings.OverclockHeatPush = listing.Slider((int)settings.OverclockHeatPush, 0f, 15f);
+
+            listing.Label("SHODANSetting_CS_OverloadBoomChance".Translate(settings.OverloadBoomChance.ToStringPercent()), -1, "SHODANSetting_CS_OverloadBoomChanceDesc".Translate());
+            settings.OverloadBoomChance = listing.Slider((float)RoundToNearestHundredth(settings.OverloadBoomChance), 0f, 1f);
+
+
+
+            listing.Gap(16f);
+            if (listing.ButtonText("Reset to default"))
+            {
+                ColonySubversionReset();
             }
         }
 

@@ -52,7 +52,7 @@ namespace Zomuro.SHODANStoryteller
             harmony.Patch(AccessTools.Method(typeof(CompPower), "CompGetGizmosExtra"),
                 null, new HarmonyMethod(typeof(HarmonyPatches), nameof(CompGetGizmosExtra_Postfix)));
 
-            // get_PowerOutput_Postfix: postfixes the power output to be affected by the mapcomp
+            // get_PowerOutput_Postfix: postfixes the power output to be affected by the mapcomp & if SHODAN has hacked the building
             harmony.Patch(AccessTools.Method(typeof(CompPowerTrader), "get_PowerOutput"),
                 null, new HarmonyMethod(typeof(HarmonyPatches), nameof(get_PowerOutput_Postfix)));
 
@@ -209,21 +209,27 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
-        // POSTFIX: alters the power output (generation and consumption) depending on SHODAN's control level
+        // POSTFIX: alters the power output (generation and consumption) depending on SHODAN's control level & if SHODAN has hacked the building
         public static void get_PowerOutput_Postfix(CompPowerTrader __instance, ref float __result)
         {
             float num = __result;
-            if (__instance.parent.Map is null || !__instance.parent.Map.IsPlayerHome) return;
-            MapComponent_ColonySubversion mapComp = MapCompColonySubversion(__instance.parent.Map);
-            if (mapComp is null) return;
+            if (__instance.parent.Map is null || !__instance.parent.Map.IsPlayerHome || (__instance.parent.Faction != null && __instance.parent.Faction.IsPlayer)) return;
+            num *= 1f + StorytellerUtility.settings.BasePowerFactor;
 
-            float flat = mapComp.ControlPercentage >= 0.25f ? 0f : 100f; // set setting here 
+            MapComponent_ColonySubversion mapComp = MapCompColonySubversion(__instance.parent.Map);
+            if (mapComp is null || !mapComp.Hacked.Contains(__instance.parent))
+            {
+                __result = num;
+                return;
+            }
+
+            float flat = StorytellerUtility.settings.PowerFlatDebuff; // set setting here mapComp.ControlPercentage >= 0.25f ? 0f : 100f
 
             // add control percent scaling here
-            if(__result < 0) 
-                __result = Mathf.Clamp(num * (mapComp.ControlPercentage >= 0.5f ? 1f : 1.5f) - flat, num, 0); // negative power output = consumption
+            if (__result < 0) 
+                __result = Mathf.Min(num * (1f + mapComp.ControlPercentage) - flat, 0); // negative power output = consumption
             else 
-                __result = Mathf.Clamp(num * (mapComp.ControlPercentage >= 0.75f ? 1f : 0.5f) + flat, 0, num); // positive power output = generation
+                __result = Mathf.Max(num * (1f - mapComp.ControlPercentage) - flat, 0); // positive power output = generation
         }
 
         // POSTFIX: adds a PDA viewing gizmo that can be used to pull up the dialog

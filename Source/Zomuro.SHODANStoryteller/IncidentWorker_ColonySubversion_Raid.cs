@@ -30,7 +30,7 @@ namespace Zomuro.SHODANStoryteller
             foreach(var target in targets)
             {
                 if (Rand.Chance(0.15f)) 
-                    GenExplosion.DoExplosion(target.Position, target.Map, target.PowerComp.Props.PowerConsumption / 1000f, DamageDefOf.Bomb, target);
+                    GenExplosion.DoExplosion(target.Position, target.Map, Mathf.Abs(target.PowerComp.Props.PowerConsumption) / 500f, DamageDefOf.Bomb, target);
             }
 
             base.SendStandardLetter(def.letterLabel.Translate(), def.letterText.Translate(), def.letterDef, parms, null, Array.Empty<NamedArgument>());

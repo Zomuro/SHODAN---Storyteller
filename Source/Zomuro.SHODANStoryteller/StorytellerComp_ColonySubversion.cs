@@ -23,14 +23,14 @@ namespace Zomuro.SHODANStoryteller
 		public override IEnumerable<FiringIncident> MakeIntervalIncidents(IIncidentTarget target)
 		{
 			// add in setting for the hacking incident MTBdays
-			if (Rand.MTBEventOccurs(1.5f, 60000f, 1000f))
+			if (Rand.MTBEventOccurs(StorytellerUtility.settings.MTBDaysHack, 60000f, 1000f))
 			{
 				IncidentParms parms = GenerateParms(Props.hackingIncident.category, target);
 				yield return new FiringIncident(Props.hackingIncident, this, parms);
 			}
 
 			// add in setting for the subversion incident MTBdays
-			if (Rand.MTBEventOccurs(5f, 60000f, 1000f))
+			if (Rand.MTBEventOccurs(StorytellerUtility.settings.MTBDaysSubversions, 60000f, 1000f))
 			{
 				//float control = StorytellerUtility.MapCompColonySubversion(target as Map).ControlPercentage;
 				IncidentParms parms = new IncidentParms();

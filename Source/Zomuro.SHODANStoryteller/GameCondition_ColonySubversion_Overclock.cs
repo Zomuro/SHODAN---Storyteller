@@ -30,9 +30,10 @@ namespace Zomuro.SHODANStoryteller
 			foreach(var building in buildings)
             {
 				// set interval for damage taken in settings
+				// every three seconds, damage building and push heat
 				if (building.IsHashIntervalTick(180)) 
 				{
-					GenTemperature.PushHeat(building, 3f); // put setting in here
+					GenTemperature.PushHeat(building, StorytellerUtility.settings.OverclockHeatPush); // put setting in here
 					building.TakeDamage(dinfo);
 				}
             }
@@ -43,6 +44,6 @@ namespace Zomuro.SHODANStoryteller
 			base.End();
 		}
 
-		public DamageInfo dinfo = new DamageInfo(DamageDefOf.Flame, 10f, 1f);
+		public DamageInfo dinfo = new DamageInfo(DamageDefOf.Flame, 3f, 1f);
 	}
 }
