@@ -104,13 +104,13 @@ namespace Zomuro.SHODANStoryteller
             Scribe_Collections.Look(ref potentialHackable, "potentialHackable", LookMode.Reference);
         }
 
-        public IEnumerable<Building> Hacked
+        public HashSet<Building> Hacked
         {
             get
             {
                 if (cachedHacked is null || dirtyHacked)
                 {
-                    cachedHacked = potentialHacked.Where(CheckActivePowerNet);
+                    cachedHacked = potentialHacked.Where(CheckActivePowerNet).ToHashSet();
                     dirtyHacked = false;
                 }
 
@@ -118,13 +118,13 @@ namespace Zomuro.SHODANStoryteller
             }
         }
 
-        public IEnumerable<Building> Hackable
+        public HashSet<Building> Hackable
         {
             get
             {
                 if(cachedHackable is null || dirtyHackable)
                 {
-                    cachedHackable = potentialHackable.Where(CheckActivePowerNet);
+                    cachedHackable = potentialHackable.Where(CheckActivePowerNet).ToHashSet();
                     dirtyHackable = false;
                 }
 
@@ -237,9 +237,9 @@ namespace Zomuro.SHODANStoryteller
 
         public HashSet<Building> potentialHackable = new HashSet<Building>();
 
-        private IEnumerable<Building> cachedHacked;
+        private HashSet<Building> cachedHacked;
 
-        private IEnumerable<Building> cachedHackable;
+        private HashSet<Building> cachedHackable;
 
         public GameCondition_ColonySubversion_LightSap cachedLightSap;
 

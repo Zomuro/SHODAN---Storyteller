@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comp_SubversionObserver.cs" />
+    <Compile Include="CompProperties_SubversionObserver.cs" />
     <Compile Include="Dialog_ColonySubversion.cs" />
     <Compile Include="StorytellerMod.cs" />
     <Compile Include="StorytellerSettings.cs" />

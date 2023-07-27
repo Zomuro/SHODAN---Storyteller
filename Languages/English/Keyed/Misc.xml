@@ -22,10 +22,17 @@
 	<!-- Inspect Line - Cybernetic Domination -->
 	<Zomuro_SHODAN_CyberneticDomination_InspectLine>Cybernetic domination active.</Zomuro_SHODAN_CyberneticDomination_InspectLine>
 	
+	<!-- Inspect Line - Cybernetic Subversion - datastream observer -->
+	<SHODAN_CS_InspectLine>{0} anomalous datastream(s) detected.</SHODAN_CS_InspectLine>
+	
 	<!-- Gizmo - Colony Subversion -->
 	<Zomuro_SHODAN_ColonySubversion_Label>Reset component</Zomuro_SHODAN_ColonySubversion_Label>
 	<Zomuro_SHODAN_ColonySubversion_Desc>Reset the building's component to a clean state, removing any malware.</Zomuro_SHODAN_ColonySubversion_Desc>
 	<Zomuro_SHODAN_CS_ViewLabel>Access TriOpt PDA</Zomuro_SHODAN_CS_ViewLabel>
 	<Zomuro_SHODAN_CS_ViewDesc>Access the TriOptimum (R) Personal Diagnostic Assistant to view component network stability. It should identify the spread of malware through the network and report on any unusual effects.</Zomuro_SHODAN_CS_ViewDesc>
-  
+	
+	<!-- Stat Entry - Colony Subversion -->
+	<SHODAN_CS_StatEntryLabel>Observation range</SHODAN_CS_StatEntryLabel>
+	<SHODAN_CS_StatEntryDesc>Determines from how far away this building can identify buildings infested with malware.</SHODAN_CS_StatEntryDesc>
+	
 </LanguageData>
