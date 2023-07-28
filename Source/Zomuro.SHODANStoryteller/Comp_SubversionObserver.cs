@@ -26,7 +26,7 @@ namespace Zomuro.SHODANStoryteller
 
         public override string CompInspectStringExtra()
         {
-            if (MapComp is null || InRange.EnumerableNullOrEmpty()) return "";
+            if (MapComp is null || MapComp.Hacked.Contains(parent) || InRange.EnumerableNullOrEmpty()) return "";
             return "SHODAN_CS_InspectLine".Translate(InRange.Count());
         }
 
@@ -36,7 +36,9 @@ namespace Zomuro.SHODANStoryteller
             GenDraw.DrawRadiusRing(parent.Position, Props.range, Color.white);
 
             if (MapComp is null || MapComp.Hacked.Contains(parent)) return;
-            foreach(var building in InRange) GenDraw.DrawLineBetween(building.DrawPos, parent.DrawPos, SimpleColor.Red, 0.2f);
+            foreach(var building in InRange) GenDraw.DrawLineBetween(building.DrawPos, parent.DrawPos, AltitudeLayer.Blueprint.AltitudeFor(), redLine, 0.2f);
+
+            // consider other altitiudes for zoom-in bug
         }
 
         public MapComponent_ColonySubversion MapComp
@@ -61,5 +63,7 @@ namespace Zomuro.SHODANStoryteller
         }
 
         private MapComponent_ColonySubversion cachedMapComp;
+
+        private Material redLine = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, Color.red);
     }
 }
